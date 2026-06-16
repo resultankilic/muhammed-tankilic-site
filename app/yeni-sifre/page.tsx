@@ -5,38 +5,78 @@ import { createClient } from "@/lib/supabase/client";
 
 export default function YeniSifrePage() {
   const [supabase] = useState(() => createClient());
-  const [loading, setLoading] = useState(false);
+
   const [checking, setChecking] = useState(true);
   const [sessionReady, setSessionReady] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
+    let isActive = true;
+
     async function prepareRecoverySession() {
       const params = new URLSearchParams(window.location.search);
       const code = params.get("code");
 
-      if (!code) {
-        setMessage("Şifre yenileme bağlantısı geçersiz veya eksik.");
-        setChecking(false);
-        return;
-      }
+      // Varsayılan Supabase e-postasından gelen PKCE kodu
+      if (code) {
+        const { error } = await supabase.auth.exchangeCodeForSession(code);
 
-      const { error } = await supabase.auth.exchangeCodeForSession(code);
+        if (!isActive) return;
 
-      if (error) {
+        if (!error) {
+          window.history.replaceState({}, "", "/yeni-sifre");
+          setSessionReady(true);
+          setChecking(false);
+          return;
+        }
+
+        // Kod daha önce kullanıldıysa mevcut oturumu kontrol et
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        if (!isActive) return;
+
+        if (user) {
+          window.history.replaceState({}, "", "/yeni-sifre");
+          setSessionReady(true);
+          setChecking(false);
+          return;
+        }
+
         setMessage(
-          "Bağlantı geçersiz veya süresi dolmuş. Yeniden şifre sıfırlama bağlantısı iste.",
+          "Bağlantı geçersiz veya süresi dolmuş. Yeni bir şifre yenileme bağlantısı iste.",
         );
         setChecking(false);
         return;
       }
 
-      window.history.replaceState({}, "", "/yeni-sifre");
+      // Gelecekte /auth/confirm tarafından oluşturulan oturum
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser();
+
+      if (!isActive) return;
+
+      if (error || !user) {
+        setMessage(
+          "Bağlantı geçersiz veya süresi dolmuş. Yeni bir şifre yenileme bağlantısı iste.",
+        );
+        setChecking(false);
+        return;
+      }
+
       setSessionReady(true);
       setChecking(false);
     }
 
     prepareRecoverySession();
+
+    return () => {
+      isActive = false;
+    };
   }, [supabase]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -44,6 +84,7 @@ export default function YeniSifrePage() {
     setMessage("");
 
     const formData = new FormData(event.currentTarget);
+
     const password = String(formData.get("password") || "");
     const passwordAgain = String(formData.get("passwordAgain") || "");
 
@@ -63,17 +104,22 @@ export default function YeniSifrePage() {
       password,
     });
 
+    if (error) {
+      setLoading(false);
+      setMessage("Şifre değiştirilemedi. Yeni bir bağlantı iste.");
+      return;
+    }
+
+    await supabase.auth.signOut();
+
     setLoading(false);
-
-   if (error) {
-  setMessage(error.message);
-  return;
-}
-
-    setMessage("Şifren başarıyla değiştirildi.");
+    setSessionReady(false);
+    setMessage(
+      "Şifren başarıyla değiştirildi. Giriş sayfasına yönlendiriliyorsun.",
+    );
 
     setTimeout(() => {
-      window.location.href = "/giris";
+      window.location.href = "/giris?sifre-degisti=1";
     }, 1500);
   }
 
@@ -84,7 +130,9 @@ export default function YeniSifrePage() {
           Hesap Güvenliği
         </p>
 
-        <h1 className="mt-4 font-serif text-4xl">Yeni Şifre Belirle</h1>
+        <h1 className="mt-4 font-serif text-4xl">
+          Yeni Şifre Belirle
+        </h1>
 
         {checking && (
           <p className="mt-6 rounded-2xl bg-[#eef5f2] px-4 py-3 text-sm">
@@ -98,6 +146,7 @@ export default function YeniSifrePage() {
               name="password"
               type="password"
               placeholder="Yeni şifre"
+              autoComplete="new-password"
               required
               minLength={8}
               className="w-full rounded-2xl border border-black/10 px-4 py-3 outline-none focus:border-[#173d56]"
@@ -107,6 +156,7 @@ export default function YeniSifrePage() {
               name="passwordAgain"
               type="password"
               placeholder="Yeni şifre tekrar"
+              autoComplete="new-password"
               required
               minLength={8}
               className="w-full rounded-2xl border border-black/10 px-4 py-3 outline-none focus:border-[#173d56]"
