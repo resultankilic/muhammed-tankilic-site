@@ -1,3 +1,4 @@
+import AuthButtons from "@/components/AuthButtons";
 export default function Home() {
   return (
     <main className="min-h-screen bg-linear-to-br from-[#f7faf9] via-white to-[#eaf3f8] text-[#14201d]">
@@ -15,13 +16,7 @@ export default function Home() {
           <a href="#iletisim">İletişim</a>
         </nav>
 
-        <div className="flex items-center gap-4 text-sm">
-          <button>Giriş Yap</button>
-
-          <button className="rounded-full bg-[#173d56] px-5 py-2.5 text-white">
-            Kayıt Ol
-          </button>
-        </div>
+       <AuthButtons />
       </header>
 
       <section className="flex min-h-[calc(100vh-96px)] items-center px-6 py-20 md:px-12">
