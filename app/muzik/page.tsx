@@ -21,7 +21,6 @@ const filters = ["Tümü", "Single", "EP", "Albüm", "Canlı Kayıt"];
 export default function MuzikPage() {
   return (
     <main className="min-h-screen bg-[#f6f3ea] text-[#17302a]">
-      {/* ÜST MENÜ */}
       <header className="sticky top-0 z-40 border-b border-[#17302a]/8 bg-[#f6f3ea]/90 backdrop-blur-xl">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-10">
           <Link
@@ -40,7 +39,6 @@ export default function MuzikPage() {
         </div>
       </header>
 
-      {/* BAŞLIK */}
       <section className="px-5 pb-12 pt-16 lg:px-10 lg:pt-24">
         <div className="mx-auto max-w-7xl rounded-4xl border border-white/80 bg-white/72 p-7 shadow-xl backdrop-blur md:p-10 lg:p-12">
           <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#39785d]">
@@ -58,7 +56,6 @@ export default function MuzikPage() {
             </p>
           </div>
 
-          {/* FİLTRELER */}
           <div className="mt-10 flex flex-wrap gap-3">
             {filters.map((item, index) => (
               <button
@@ -77,12 +74,10 @@ export default function MuzikPage() {
         </div>
       </section>
 
-      {/* ZEF CARA */}
       <section className="px-5 pb-24 lg:px-10">
         <div className="mx-auto max-w-7xl">
           <article className="overflow-hidden rounded-4xl border border-white/85 bg-[#edf3ef]/90 shadow-2xl backdrop-blur">
             <div className="grid lg:grid-cols-[0.88fr_1.12fr]">
-              {/* KAPAK */}
               <div className="relative min-h-105 bg-[#dce7e1] lg:min-h-170">
                 <Image
                   src="/muzik/zef-cara-cover.jpg"
@@ -100,7 +95,6 @@ export default function MuzikPage() {
                 </div>
               </div>
 
-              {/* DETAY */}
               <div className="flex flex-col justify-between bg-[#eef5f1]/95 p-7 md:p-10 lg:p-14">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#39785d]">
@@ -121,7 +115,6 @@ export default function MuzikPage() {
                     daha sonra bu alana eklenecek.
                   </p>
 
-                  {/* PLATFORM BUTONLARI */}
                   <div className="mt-10 flex flex-wrap gap-3">
                     {platforms.map((platform) => (
                       <a
@@ -145,7 +138,6 @@ export default function MuzikPage() {
                     </button>
                   </div>
 
-                  {/* SPOTIFY OYNATICI */}
                   <div className="mt-10 rounded-4xl border border-white/80 bg-[#f9fbf9]/90 p-5 shadow-lg">
                     <div className="mb-4">
                       <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#39785d]">
@@ -169,7 +161,6 @@ export default function MuzikPage() {
                   </div>
                 </div>
 
-                {/* BİLGİLER */}
                 <div className="mt-14 grid gap-4 border-t border-[#17302a]/10 pt-8 sm:grid-cols-3">
                   <div className="rounded-3xl bg-white/70 p-5">
                     <p className="text-xs uppercase tracking-[0.2em] text-[#7b8b85]">
@@ -205,7 +196,6 @@ export default function MuzikPage() {
             </div>
           </article>
 
-          {/* GELECEK İÇERİK */}
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             <article className="rounded-4xl border border-white/80 bg-[#f8fbf9]/92 p-7 shadow-lg">
               <p className="text-sm text-[#39785d]">Şarkı Sözleri</p>
