@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import AuthButtons from "@/components/AuthButtons";
 
 const latestRelease = {
   title: "Zef Cara",
@@ -12,7 +11,6 @@ const latestRelease = {
   spotifyUrl:
     "https://open.spotify.com/intl-tr/track/7B5SGhv7YD7opodmyJQQqm?si=958d9492fbd4447b",
   appleUrl: "https://music.apple.com/us/album/zef-cara-single/1779404301",
-  youtubeEmbedUrl: "",
 };
 
 const songs = [
@@ -62,52 +60,25 @@ export default function Home() {
     <main className="min-h-screen text-[var(--foreground)]">
       <Navbar />
 
-      {/* GİRİŞ EKRANI: SADECE FOTOĞRAF */}
+      {/* GİRİŞ EKRANI: SADECE NAVBAR + FOTOĞRAF */}
       <section
         id="anasayfa"
         className="mx-auto w-full max-w-[1500px] px-4 pt-5 md:px-6 md:pt-7"
       >
-        <div className="relative h-[calc(100vh-120px)] min-h-[620px] overflow-hidden rounded-[36px] border border-white/35 bg-black shadow-[0_24px_80px_rgba(75,35,45,0.14)]">
-          <Image
-            src="/muhammed-hero2.png"
-            alt="Muhammed Tankılıç gitar çalarken"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-        </div>
-      </section>
-
-      <section
-        id="uyelik"
-        className="mx-auto w-full max-w-[1180px] px-4 py-6 md:px-6"
-      >
-        <div className="flex flex-col gap-4 rounded-[32px] border border-[rgba(75,35,45,0.10)] bg-[rgba(189,235,232,0.72)] px-5 py-5 shadow-[0_18px_45px_rgba(75,35,45,0.06)] backdrop-blur-xl md:flex-row md:items-center md:justify-between md:px-6">
-          <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[rgba(75,35,45,0.84)]">
-              Üyelik
-            </p>
-
-            <h2 className="mt-2 text-2xl font-semibold leading-tight tracking-[-0.05em] text-[var(--burgundy)] md:text-4xl">
-              Özel içerikler ve indirmeler için giriş yap.
-            </h2>
-
-            <p className="mt-2 max-w-2xl text-sm font-light leading-7 text-[rgba(75,35,45,0.68)]">
-              Üyeler şarkı sözlerine, özel içeriklere ve indirme bağlantılarına
-              erişebilir.
-            </p>
-          </div>
-
-          <div className="shrink-0">
-            <AuthButtons />
-          </div>
-        </div>
+        <div
+          className="relative h-[calc(100vh-118px)] min-h-[620px] overflow-hidden rounded-[36px] border border-white/35 shadow-[0_24px_80px_rgba(75,35,45,0.14)]"
+          style={{
+            backgroundImage: 'url("/muhammed-hero2.png")',
+            backgroundSize: "cover",
+            backgroundPosition: "center top",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
       </section>
 
       <section
         id="son-cikan"
-        className="mx-auto w-full max-w-[1180px] px-4 py-7 md:px-6"
+        className="mx-auto w-full max-w-[1180px] px-4 py-10 md:px-6"
       >
         <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
@@ -203,19 +174,9 @@ export default function Home() {
                   </p>
 
                   <div className="mt-3 flex aspect-video items-center justify-center rounded-[22px] bg-[rgba(75,35,45,0.05)] px-5 text-center">
-                    {latestRelease.youtubeEmbedUrl ? (
-                      <iframe
-                        src={latestRelease.youtubeEmbedUrl}
-                        title={`${latestRelease.title} videosu`}
-                        className="h-full w-full rounded-[22px]"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                      />
-                    ) : (
-                      <p className="text-sm font-light leading-6 text-[rgba(75,35,45,0.62)]">
-                        YouTube videosu eklendiğinde burada oynatılacak.
-                      </p>
-                    )}
+                    <p className="text-sm font-light leading-6 text-[rgba(75,35,45,0.62)]">
+                      YouTube videosu eklendiğinde burada oynatılacak.
+                    </p>
                   </div>
 
                   <div className="mt-4 rounded-[22px] bg-white/70 p-3">
