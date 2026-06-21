@@ -13,6 +13,27 @@ const latestRelease = {
   appleUrl: "https://music.apple.com/us/album/zef-cara-single/1779404301",
 };
 
+const quickLinks = [
+  {
+    title: "Şarkılar",
+    description: "Yayınlanan parçalar, akustik kayıtlar ve özel müzik arşivi.",
+    href: "/muzik",
+    label: "Müzik Arşivi",
+  },
+  {
+    title: "Videolar",
+    description: "Klipler, kısa performanslar ve video kayıtları.",
+    href: "/videolar",
+    label: "Video Arşivi",
+  },
+  {
+    title: "Fotoğraflar",
+    description: "Kapak görselleri, portreler ve sahne arkası kareler.",
+    href: "/fotograflar",
+    label: "Görsel Arşiv",
+  },
+];
+
 const songs = [
   {
     title: "Zef Cara",
@@ -31,235 +52,214 @@ const songs = [
   {
     title: "Cover Yorumlar",
     type: "Yakında",
-    description: "Tanıdık ezgilerin kişisel yorumları.",
+    description: "Tanıdık ezgilerin kişisel, sakin ve akustik yorumları.",
     coverImage: "/muhammed-hero2.png",
     href: "/muzik",
   },
 ];
 
-const quickSections = [
-  {
-    title: "Videolar",
-    description: "Klipler, kısa performanslar ve sahne arkası görüntüler.",
-    href: "/videolar",
-  },
-  {
-    title: "Fotoğraflar",
-    description: "Kapak tasarımları, portreler ve görsel arşiv.",
-    href: "/fotograflar",
-  },
-  {
-    title: "Hakkında",
-    description: "Sanatçının müzik dili, sözleri ve kişisel hikâyesi.",
-    href: "/hakkinda",
-  },
-];
-
 export default function Home() {
   return (
-    <main className="min-h-screen text-[var(--foreground)]">
+    <main className="page-shell">
       <Navbar />
 
-      {/* GİRİŞ EKRANI: SADECE NAVBAR + FOTOĞRAF */}
-      <section
-        id="anasayfa"
-        className="mx-auto w-full max-w-[1500px] px-4 pt-5 md:px-6 md:pt-7"
-      >
-        <div
-          className="relative h-[calc(100vh-118px)] min-h-[620px] overflow-hidden rounded-[36px] border border-white/35 shadow-[0_24px_80px_rgba(75,35,45,0.14)]"
-          style={{
-            backgroundImage: 'url("/muhammed-hero2.png")',
-            backgroundSize: "cover",
-            backgroundPosition: "center top",
-            backgroundRepeat: "no-repeat",
-          }}
-        />
-      </section>
+      <section className="site-container pt-3 md:pt-4">
+        <div className="relative overflow-hidden rounded-[34px] border border-white/30 bg-white/32 px-5 py-5 shadow-[0_22px_70px_rgba(75,35,45,0.11)] backdrop-blur-[7px] md:px-8 md:py-7 lg:px-10 lg:py-8">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_16%_8%,rgba(189,235,232,0.18),transparent_32%),radial-gradient(circle_at_88%_16%,rgba(245,174,80,0.12),transparent_28%)]" />
 
-      <section
-        id="son-cikan"
-        className="mx-auto w-full max-w-[1180px] px-4 py-10 md:px-6"
-      >
-        <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[rgba(75,35,45,0.84)]">
-              Son Çıkan
-            </p>
+          <div className="relative grid gap-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+            <div className="max-w-3xl">
+              <div className="mb-5 flex flex-wrap gap-2">
+                <span className="rounded-full bg-[#BDEBE8]/70 px-4 py-2 text-[11px] font-semibold text-[#4B232D]">
+                  Bağımsız Sanatçı
+                </span>
+                <span className="rounded-full bg-white/44 px-4 py-2 text-[11px] font-semibold text-[#4B232D]/72">
+                  Kürtçe Müzik
+                </span>
+                <span className="rounded-full bg-white/44 px-4 py-2 text-[11px] font-semibold text-[#4B232D]/72">
+                  Akustik Folk
+                </span>
+              </div>
 
-            <h2 className="mt-2 text-3xl font-semibold leading-none tracking-[-0.05em] text-[var(--burgundy)] md:text-5xl">
-              Yeni kayıt
-            </h2>
+              <p className="section-eyebrow">Muhammed Tankılıç</p>
 
-            <p className="mt-2 max-w-2xl text-sm font-light leading-6 text-[rgba(75,35,45,0.68)]">
-              En son yayımlanan parça, dinleme bağlantıları ve video alanı.
-            </p>
-          </div>
+              <h1 className="max-w-[760px] text-[clamp(40px,6vw,70px)] font-semibold leading-[0.94] tracking-[-0.08em] text-[#4B232D]">
+                Kürtçe müziğin sade, akustik ve kişisel sesi.
+              </h1>
 
-          <Link
-            href="/muzik"
-            className="inline-flex w-fit rounded-full border border-[rgba(75,35,45,0.10)] bg-white/78 px-5 py-3 text-sm font-medium text-[var(--burgundy)] transition hover:-translate-y-0.5"
-          >
-            Tüm Müzikler
-          </Link>
-        </div>
+              <p className="mt-5 max-w-2xl text-[14px] leading-7 text-[#4B232D]/76 md:text-[15px]">
+                Muhammed Tankılıç’ın müzikleri, sözleri ve hikâyeleri. Yeni
+                şarkıları dinleyin, videoları izleyin ve sanatçının kişisel
+                müzik arşivini keşfedin.
+              </p>
 
-        <article className="overflow-hidden rounded-[32px] border border-[rgba(75,35,45,0.10)] bg-[rgba(255,255,255,0.84)] shadow-[0_18px_55px_rgba(75,35,45,0.08)] backdrop-blur-xl">
-          <div className="grid lg:grid-cols-[0.34fr_0.66fr]">
-            <div className="relative h-72 lg:h-full">
-              <Image
-                src={latestRelease.coverImage}
-                alt={`${latestRelease.title} kapak görseli`}
-                fill
-                sizes="(max-width: 1024px) 100vw, 34vw"
-                className="object-cover"
-              />
-
-              <div className="absolute inset-0 bg-linear-to-t from-black/28 via-transparent to-transparent" />
-
-              <div className="absolute bottom-4 left-4 rounded-full border border-white/60 bg-white/82 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--burgundy)]">
-                Latest Release
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href="/muzik" className="pill-button">
+                  Şarkıları Dinle
+                </Link>
+                <Link href="/videolar" className="pill-button secondary">
+                  Videolar
+                </Link>
+                <Link href="/iletisim" className="pill-button ghost">
+                  İletişim
+                </Link>
               </div>
             </div>
 
-            <div className="p-5 md:p-6">
-              <div className="grid gap-5 xl:grid-cols-[0.9fr_1.1fr]">
-                <div>
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[rgba(75,35,45,0.58)]">
-                    Öne Çıkan Eser
-                  </p>
-
-                  <h3 className="mt-2 text-4xl font-semibold leading-none tracking-[-0.06em] text-[var(--burgundy)] md:text-6xl">
-                    {latestRelease.title}
-                  </h3>
-
-                  <p className="mt-3 text-xs font-medium text-[rgba(75,35,45,0.56)]">
-                    {latestRelease.artist}
-                  </p>
-
-                  <p className="mt-5 text-[15px] font-light leading-7 text-[rgba(75,35,45,0.72)]">
-                    {latestRelease.description}
-                  </p>
-
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    <a
-                      href={latestRelease.spotifyUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex rounded-full bg-[var(--orange)] px-5 py-3 text-sm font-medium text-[var(--burgundy)] transition hover:-translate-y-0.5"
-                    >
-                      Spotify
-                    </a>
-
-                    <a
-                      href={latestRelease.appleUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex rounded-full border border-[rgba(75,35,45,0.10)] bg-white/70 px-5 py-3 text-sm font-medium text-[var(--burgundy)] transition hover:-translate-y-0.5"
-                    >
-                      Apple Music
-                    </a>
-
-                    <Link
-                      href="/giris?next=/muzik"
-                      className="inline-flex rounded-full border border-[rgba(75,35,45,0.10)] bg-white/70 px-5 py-3 text-sm font-medium text-[var(--burgundy)] transition hover:-translate-y-0.5"
-                    >
-                      İndir
-                    </Link>
-                  </div>
+            <div className="rounded-[28px] border border-white/16 bg-[#4B232D]/82 p-4 text-white shadow-[0_20px_58px_rgba(75,35,45,0.22)] backdrop-blur-[9px]">
+              <div className="grid gap-4 sm:grid-cols-[124px_1fr] lg:grid-cols-1 xl:grid-cols-[138px_1fr]">
+                <div className="relative aspect-square overflow-hidden rounded-[21px] bg-black/20">
+                  <Image
+                    src={latestRelease.coverImage}
+                    alt="Zef Cara kapak görseli"
+                    fill
+                    priority
+                    sizes="(max-width: 900px) 45vw, 160px"
+                    className="object-cover"
+                  />
                 </div>
 
-                <div className="rounded-[28px] border border-[rgba(75,35,45,0.10)] bg-white/55 p-4">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[rgba(75,35,45,0.48)]">
-                    Video Alanı
-                  </p>
+                <div className="flex flex-col justify-between gap-4 p-1">
+                  <div>
+                    <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/55">
+                      Son Çıkan
+                    </p>
 
-                  <div className="mt-3 flex aspect-video items-center justify-center rounded-[22px] bg-[rgba(75,35,45,0.05)] px-5 text-center">
-                    <p className="text-sm font-light leading-6 text-[rgba(75,35,45,0.62)]">
-                      YouTube videosu eklendiğinde burada oynatılacak.
+                    <h2 className="text-[clamp(30px,3.5vw,44px)] font-semibold leading-[0.96] tracking-[-0.075em] text-white">
+                      {latestRelease.title}
+                    </h2>
+
+                    <p className="mt-2 text-sm font-medium text-white/90">
+                      {latestRelease.artist}
+                    </p>
+
+                    <p className="mt-3 max-w-md text-[13px] leading-6 text-white/68">
+                      {latestRelease.description}
                     </p>
                   </div>
 
-                  <div className="mt-4 rounded-[22px] bg-white/70 p-3">
-                    <audio controls preload="none" className="w-full">
-                      Tarayıcınız ses oynatmayı desteklemiyor.
-                    </audio>
+                  <div>
+                    <div className="mb-3 flex h-10 items-end gap-1 rounded-2xl border border-white/15 bg-white/8 px-4 pb-3">
+                      <span className="h-3 w-1 rounded-full bg-[#BDEBE8]" />
+                      <span className="h-6 w-1 rounded-full bg-[#BDEBE8]" />
+                      <span className="h-4 w-1 rounded-full bg-[#BDEBE8]" />
+                      <span className="h-7 w-1 rounded-full bg-[#BDEBE8]" />
+                      <span className="h-5 w-1 rounded-full bg-[#BDEBE8]" />
+                      <span className="ml-3 text-xs font-semibold text-white/72">
+                        Zef Cara
+                      </span>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      <a
+                        href={latestRelease.spotifyUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="pill-button"
+                      >
+                        Spotify
+                      </a>
+
+                      <a
+                        href={latestRelease.appleUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="pill-button light-button"
+                      >
+                        Apple Music
+                      </a>
+
+                      <Link href="/giris" className="pill-button outline-light">
+                        Üye Olup İndir
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </article>
+
+          <div className="relative mt-6 flex flex-wrap gap-2 text-[12px] font-semibold text-[#4B232D]/72">
+            <span className="rounded-full bg-white/38 px-4 py-2 backdrop-blur-md">
+              Son Çıkan: Zef Cara
+            </span>
+            <span className="rounded-full bg-white/38 px-4 py-2 backdrop-blur-md">
+              Tür: Kürtçe · Akustik
+            </span>
+            <span className="rounded-full bg-white/38 px-4 py-2 backdrop-blur-md">
+              Arşiv: Şarkılar · Videolar · Fotoğraflar
+            </span>
+          </div>
+        </div>
       </section>
 
-      <section
-        id="sarkilar"
-        className="mx-auto w-full max-w-[1180px] px-4 py-7 md:px-6"
-      >
-        <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+      <section className="site-container section-space">
+        <div className="grid gap-4 md:grid-cols-3">
+          {quickLinks.map((item) => (
+            <Link
+              key={item.title}
+              href={item.href}
+              className="group rounded-[30px] border border-[#4B232D]/10 bg-white/46 p-6 shadow-[0_18px_50px_rgba(75,35,45,0.08)] backdrop-blur-[10px] transition hover:-translate-y-1 hover:bg-white/58 hover:shadow-[0_28px_80px_rgba(75,35,45,0.16)]"
+            >
+              <span className="mb-8 inline-flex rounded-full bg-[#FFF4BC]/82 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#4B232D]">
+                {item.label}
+              </span>
+
+              <h2 className="text-[30px] font-semibold leading-none tracking-[-0.065em] text-[#4B232D]">
+                {item.title}
+              </h2>
+
+              <p className="mt-4 text-sm leading-7 text-[#4B232D]/68">
+                {item.description}
+              </p>
+
+              <strong className="mt-7 block text-sm text-[#4B232D]">
+                Sayfaya Git →
+              </strong>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="site-container section-space">
+        <div className="section-header">
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[rgba(75,35,45,0.84)]">
-              Şarkılar
-            </p>
-
-            <h2 className="mt-2 text-3xl font-semibold leading-none tracking-[-0.05em] text-[var(--burgundy)] md:text-5xl">
-              Kayıtlar ve yorumlar
-            </h2>
-
-            <p className="mt-2 max-w-2xl text-sm font-light leading-6 text-[rgba(75,35,45,0.68)]">
+            <p className="section-eyebrow">Şarkılar</p>
+            <h2 className="section-title">Kayıtlar ve yorumlar</h2>
+            <p className="section-description">
               Özgün parçalar, akustik yorumlar ve yakında eklenecek özel
               kayıtlar.
             </p>
           </div>
 
-          <Link
-            href="/muzik"
-            className="inline-flex w-fit rounded-full border border-[rgba(75,35,45,0.10)] bg-white/78 px-5 py-3 text-sm font-medium text-[var(--burgundy)] transition hover:-translate-y-0.5"
-          >
+          <Link href="/muzik" className="pill-button secondary">
             Tümünü Gör
           </Link>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="music-grid">
           {songs.map((song) => (
-            <article
-              key={song.title}
-              className="overflow-hidden rounded-[30px] border border-[rgba(75,35,45,0.10)] bg-[rgba(255,255,255,0.84)] shadow-[0_16px_45px_rgba(75,35,45,0.07)] backdrop-blur-xl"
-            >
-              <div className="relative h-40 bg-[rgba(189,235,232,0.35)]">
+            <article key={song.title} className="music-card soft-card">
+              <Link href={song.href} className="music-cover">
                 <Image
                   src={song.coverImage}
                   alt={`${song.title} görseli`}
                   fill
                   sizes="(max-width: 900px) 100vw, 33vw"
-                  className="object-cover object-[center_58%]"
+                  className="object-cover"
                 />
-              </div>
+              </Link>
 
-              <div className="p-5">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[rgba(75,35,45,0.50)]">
-                  {song.type}
-                </p>
+              <div className="music-card-body">
+                <span>{song.type}</span>
+                <h3>{song.title}</h3>
+                <p>{song.description}</p>
 
-                <h3 className="mt-2 text-2xl font-semibold tracking-[-0.05em] text-[var(--burgundy)]">
-                  {song.title}
-                </h3>
-
-                <p className="mt-3 text-sm font-light leading-6 text-[rgba(75,35,45,0.68)]">
-                  {song.description}
-                </p>
-
-                <div className="mt-5 flex flex-wrap gap-2">
-                  <Link
-                    href={song.href}
-                    className="inline-flex rounded-full bg-[var(--orange)] px-4 py-2.5 text-sm font-medium text-[var(--burgundy)] transition hover:-translate-y-0.5"
-                  >
+                <div className="card-actions">
+                  <Link href={song.href} className="text-link">
                     Detay
                   </Link>
-
-                  <Link
-                    href="/giris?next=/muzik"
-                    className="inline-flex rounded-full border border-[rgba(75,35,45,0.10)] bg-white/70 px-4 py-2.5 text-sm font-medium text-[var(--burgundy)] transition hover:-translate-y-0.5"
-                  >
+                  <Link href="/giris" className="text-link muted">
                     İndir
                   </Link>
                 </div>
@@ -269,120 +269,54 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-[1180px] px-4 py-7 md:px-6">
-        <div className="grid gap-4 md:grid-cols-3">
-          {quickSections.map((item) => (
-            <Link
-              key={item.title}
-              href={item.href}
-              className="rounded-[30px] border border-[rgba(75,35,45,0.10)] bg-[rgba(255,255,255,0.84)] p-5 shadow-[0_16px_45px_rgba(75,35,45,0.07)] backdrop-blur-xl transition hover:-translate-y-1"
-            >
-              <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[rgba(75,35,45,0.84)]">
-                {item.title}
-              </p>
+      <section className="site-container section-space">
+        <div className="grid gap-4 lg:grid-cols-[1.18fr_0.82fr]">
+          <div className="rounded-[32px] border border-[#4B232D]/10 bg-white/50 p-7 shadow-[0_18px_50px_rgba(75,35,45,0.08)] backdrop-blur-[10px] md:p-9">
+            <p className="section-eyebrow">Hakkında</p>
 
-              <h3 className="mt-2 text-2xl font-semibold tracking-[-0.05em] text-[var(--burgundy)]">
-                {item.title}
-              </h3>
+            <h2 className="section-title">Söz, ses ve hikâye.</h2>
 
-              <p className="mt-3 text-sm font-light leading-6 text-[rgba(75,35,45,0.68)]">
-                {item.description}
-              </p>
+            <p className="mt-5 max-w-2xl text-sm leading-8 text-[#4B232D]/70">
+              Muhammed Tankılıç, Kürtçe şarkı söyleyen bağımsız bir sanatçı
+              olarak müziğini sade melodiler, akustik düzenlemeler ve kişisel
+              hikâyeler üzerine kurar.
+            </p>
 
-              <span className="mt-5 inline-flex text-sm font-medium text-[var(--burgundy)]">
-                Sayfaya Git →
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
+            <div className="hero-actions">
+              <Link href="/hakkinda" className="pill-button dark">
+                Daha Fazla
+              </Link>
 
-      <section
-        id="hakkinda"
-        className="mx-auto w-full max-w-[1180px] px-4 py-7 md:px-6"
-      >
-        <div className="rounded-[32px] bg-[var(--burgundy)] p-5 shadow-[0_18px_50px_rgba(75,35,45,0.16)] md:p-6">
-          <div className="grid gap-5 md:grid-cols-[0.85fr_1.15fr] md:items-center">
-            <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white/60">
-                Hakkında
-              </p>
-
-              <h2 className="mt-2 text-3xl font-semibold leading-none tracking-[-0.05em] text-white md:text-5xl">
-                Söz, ses ve hikâye.
-              </h2>
-            </div>
-
-            <div>
-              <p className="text-sm font-light leading-7 text-white/78">
-                Muhammed Tankılıç, Kürtçe şarkı söyleyen bağımsız bir sanatçı
-                olarak müziğini sade melodiler, akustik düzenlemeler ve kişisel
-                hikâyeler üzerine kurar.
-              </p>
-
-              <div className="mt-5 flex flex-wrap gap-2">
-                <Link
-                  href="/hakkinda"
-                  className="inline-flex rounded-full bg-[var(--orange)] px-5 py-3 text-sm font-medium text-[var(--burgundy)] transition hover:-translate-y-0.5"
-                >
-                  Daha Fazla
-                </Link>
-
-                <Link
-                  href="/iletisim"
-                  className="inline-flex rounded-full border border-white/18 bg-white/12 px-5 py-3 text-sm font-medium text-white transition hover:-translate-y-0.5"
-                >
-                  İletişim
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <footer
-        id="iletisim"
-        className="mx-auto w-full max-w-[1180px] px-4 py-7 pb-10 md:px-6"
-      >
-        <div className="rounded-[32px] border border-[rgba(75,35,45,0.10)] bg-[rgba(255,255,255,0.84)] p-5 shadow-[0_16px_45px_rgba(75,35,45,0.07)] backdrop-blur-xl md:p-6">
-          <div className="grid gap-5 md:grid-cols-[1fr_0.8fr] md:items-end">
-            <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[rgba(75,35,45,0.84)]">
+              <Link href="/iletisim" className="pill-button secondary">
                 İletişim
-              </p>
-
-              <h2 className="mt-2 text-3xl font-semibold leading-none tracking-[-0.05em] text-[var(--burgundy)] md:text-5xl">
-                Müzik ve iş birlikleri
-              </h2>
-
-              <p className="mt-2 max-w-2xl text-sm font-light leading-6 text-[rgba(75,35,45,0.68)]">
-                Konser, kayıt, video, dijital yayın ve iş birliği talepleri
-                için iletişim kanalları.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-2 md:justify-end">
-              <a
-                href="mailto:iletisim@muhammedtankilic.com"
-                className="inline-flex rounded-full bg-[var(--orange)] px-5 py-3 text-sm font-medium text-[var(--burgundy)] transition hover:-translate-y-0.5"
-              >
-                E-posta
-              </a>
-
-              <Link
-                href="/iletisim"
-                className="inline-flex rounded-full border border-[rgba(75,35,45,0.10)] bg-white/70 px-5 py-3 text-sm font-medium text-[var(--burgundy)] transition hover:-translate-y-0.5"
-              >
-                İletişim Sayfası
               </Link>
             </div>
           </div>
 
-          <div className="mt-6 flex flex-col justify-between gap-3 border-t border-[rgba(75,35,45,0.10)] pt-4 text-xs font-light text-[rgba(75,35,45,0.58)] md:flex-row">
-            <p>© 2026 Muhammed Tankılıç. Tüm hakları saklıdır.</p>
-            <p>Kürtçe müzik · Akustik yorumlar · Kişisel arşiv</p>
+          <div className="rounded-[32px] border border-[#4B232D]/10 bg-[#FFF4BC]/66 p-7 shadow-[0_18px_50px_rgba(75,35,45,0.08)] backdrop-blur-[10px] md:p-9">
+            <p className="section-eyebrow">İletişim</p>
+
+            <h2 className="text-[clamp(28px,3vw,38px)] font-semibold leading-none tracking-[-0.065em] text-[#4B232D]">
+              Müzik ve iş birlikleri
+            </h2>
+
+            <p className="mt-5 text-sm leading-7 text-[#4B232D]/70">
+              Konser, kayıt, video, dijital yayın ve iş birliği talepleri için
+              iletişim kanallarını kullanabilirsiniz.
+            </p>
+
+            <div className="mt-7">
+              <Link href="/iletisim" className="pill-button">
+                İletişim Sayfası
+              </Link>
+            </div>
           </div>
         </div>
+      </section>
+
+      <footer className="site-container site-footer">
+        <p>© 2026 Muhammed Tankılıç. Tüm hakları saklıdır.</p>
+        <span>Kürtçe müzik · Akustik yorumlar · Kişisel arşiv</span>
       </footer>
     </main>
   );
