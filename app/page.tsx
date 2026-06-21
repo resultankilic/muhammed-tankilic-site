@@ -1,17 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-
-const latestRelease = {
-  title: "Zef Cara",
-  artist: "Muhammed Tankılıç",
-  coverImage: "/muzik/zef-cara-cover.jpg",
-  description:
-    "Kürtçe sözler, akustik gitar ve sade bir yorumla şekillenen özgün çalışma.",
-  spotifyUrl:
-    "https://open.spotify.com/intl-tr/track/7B5SGhv7YD7opodmyJQQqm?si=958d9492fbd4447b",
-  appleUrl: "https://music.apple.com/us/album/zef-cara-single/1779404301",
-};
+import { featuredSongs, latestSong } from "@/lib/data/songs";
 
 const quickLinks = [
   {
@@ -34,29 +24,31 @@ const quickLinks = [
   },
 ];
 
-const songs = [
+const previewSongs = [
+  ...featuredSongs,
   {
-    title: "Zef Cara",
-    type: "Single",
-    description: "Kürtçe sözler, akustik gitar ve yalın yorum.",
-    coverImage: "/muzik/zef-cara-cover.jpg",
-    href: "/muzik",
-  },
-  {
+    slug: "akustik-kayitlar",
     title: "Akustik Kayıtlar",
     type: "Arşiv",
-    description: "Ev kayıtları, prova notları ve sade yorumlar.",
+    shortDescription: "Ev kayıtları, prova notları ve sade yorumlar.",
     coverImage: "/muhammed-hero2.png",
-    href: "/muzik",
   },
   {
+    slug: "cover-yorumlar",
     title: "Cover Yorumlar",
     type: "Yakında",
-    description: "Tanıdık ezgilerin kişisel, sakin ve akustik yorumları.",
+    shortDescription: "Tanıdık ezgilerin kişisel, sakin ve akustik yorumları.",
     coverImage: "/muhammed-hero2.png",
-    href: "/muzik",
   },
-];
+].slice(0, 3);
+
+const spotifyLink = latestSong.platforms.find(
+  (platform) => platform.name === "Spotify",
+);
+
+const appleMusicLink = latestSong.platforms.find(
+  (platform) => platform.name === "Apple Music",
+);
 
 export default function Home() {
   return (
@@ -110,8 +102,8 @@ export default function Home() {
               <div className="grid gap-4 sm:grid-cols-[124px_1fr] lg:grid-cols-1 xl:grid-cols-[138px_1fr]">
                 <div className="relative aspect-square overflow-hidden rounded-[21px] bg-black/20">
                   <Image
-                    src={latestRelease.coverImage}
-                    alt="Zef Cara kapak görseli"
+                    src={latestSong.coverImage}
+                    alt={`${latestSong.title} kapak görseli`}
                     fill
                     priority
                     sizes="(max-width: 900px) 45vw, 160px"
@@ -126,15 +118,15 @@ export default function Home() {
                     </p>
 
                     <h2 className="text-[clamp(30px,3.5vw,44px)] font-semibold leading-[0.96] tracking-[-0.075em] text-white">
-                      {latestRelease.title}
+                      {latestSong.title}
                     </h2>
 
                     <p className="mt-2 text-sm font-medium text-white/90">
-                      {latestRelease.artist}
+                      {latestSong.artist}
                     </p>
 
                     <p className="mt-3 max-w-md text-[13px] leading-6 text-white/68">
-                      {latestRelease.description}
+                      {latestSong.shortDescription}
                     </p>
                   </div>
 
@@ -146,28 +138,32 @@ export default function Home() {
                       <span className="h-7 w-1 rounded-full bg-[#BDEBE8]" />
                       <span className="h-5 w-1 rounded-full bg-[#BDEBE8]" />
                       <span className="ml-3 text-xs font-semibold text-white/72">
-                        Zef Cara
+                        {latestSong.title}
                       </span>
                     </div>
 
                     <div className="flex flex-wrap gap-2">
-                      <a
-                        href={latestRelease.spotifyUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="pill-button"
-                      >
-                        Spotify
-                      </a>
+                      {spotifyLink ? (
+                        <a
+                          href={spotifyLink.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="pill-button"
+                        >
+                          Spotify
+                        </a>
+                      ) : null}
 
-                      <a
-                        href={latestRelease.appleUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="pill-button light-button"
-                      >
-                        Apple Music
-                      </a>
+                      {appleMusicLink ? (
+                        <a
+                          href={appleMusicLink.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="pill-button light-button"
+                        >
+                          Apple Music
+                        </a>
+                      ) : null}
 
                       <Link href="/giris" className="pill-button outline-light">
                         Üye Olup İndir
@@ -181,10 +177,10 @@ export default function Home() {
 
           <div className="relative mt-6 flex flex-wrap gap-2 text-[12px] font-semibold text-[#4B232D]/72">
             <span className="rounded-full bg-white/38 px-4 py-2 backdrop-blur-md">
-              Son Çıkan: Zef Cara
+              Son Çıkan: {latestSong.title}
             </span>
             <span className="rounded-full bg-white/38 px-4 py-2 backdrop-blur-md">
-              Tür: Kürtçe · Akustik
+              Tür: {latestSong.genre}
             </span>
             <span className="rounded-full bg-white/38 px-4 py-2 backdrop-blur-md">
               Arşiv: Şarkılar · Videolar · Fotoğraflar
@@ -238,9 +234,9 @@ export default function Home() {
         </div>
 
         <div className="music-grid">
-          {songs.map((song) => (
-            <article key={song.title} className="music-card soft-card">
-              <Link href={song.href} className="music-cover">
+          {previewSongs.map((song) => (
+            <article key={song.slug} className="music-card soft-card">
+              <Link href="/muzik" className="music-cover">
                 <Image
                   src={song.coverImage}
                   alt={`${song.title} görseli`}
@@ -253,10 +249,10 @@ export default function Home() {
               <div className="music-card-body">
                 <span>{song.type}</span>
                 <h3>{song.title}</h3>
-                <p>{song.description}</p>
+                <p>{song.shortDescription}</p>
 
                 <div className="card-actions">
-                  <Link href={song.href} className="text-link">
+                  <Link href="/muzik" className="text-link">
                     Detay
                   </Link>
                   <Link href="/giris" className="text-link muted">
