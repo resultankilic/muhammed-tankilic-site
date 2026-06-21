@@ -6,7 +6,7 @@ const galleryItems = [
   {
     title: "Portreler",
     description: "Sanatçı kimliği için sade portre arşivi.",
-    image: "/muhammed-hero2.png",
+    image: "/muhammed-hero2-site.jpg",
   },
   {
     title: "Kapak görselleri",
@@ -16,7 +16,7 @@ const galleryItems = [
   {
     title: "Sahne arkası",
     description: "Kayıt, prova ve üretim sürecinden kareler.",
-    image: "/muhammed-hero2.png",
+    image: "/muhammed-hero2-site.jpg",
   },
   {
     title: "Müzik arşivi",

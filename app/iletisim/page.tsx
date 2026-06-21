@@ -5,7 +5,7 @@ const contactLinks = [
   {
     title: "E-posta",
     description: "Müzik, iş birliği ve iletişim talepleri için.",
-    href: "mailto:iletisim@muhammedtankilic.com",
+    href: "mailto:muhammedtnklc@gmail.com",
     label: "E-posta Gönder",
   },
   {
@@ -47,10 +47,10 @@ export default function IletisimPage() {
               <p className="text-sm font-bold text-white">Ana iletişim</p>
 
               <a
-                href="mailto:iletisim@muhammedtankilic.com"
+                href="mailto:muhammedtnklc@gmail.com"
                 className="mt-2 block wrap-break-word text-sm leading-7 text-white/72 hover:text-white"
               >
-                iletisim@muhammedtankilic.com
+                muhammedtnklc@gmail.com
               </a>
             </div>
           </aside>

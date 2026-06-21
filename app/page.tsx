@@ -31,14 +31,14 @@ const previewSongs = [
     title: "Akustik Kayıtlar",
     type: "Arşiv",
     shortDescription: "Ev kayıtları, prova notları ve sade yorumlar.",
-    coverImage: "/muhammed-hero2.png",
+    coverImage: "/muhammed-hero2-site.jpg",
   },
   {
     slug: "cover-yorumlar",
     title: "Cover Yorumlar",
     type: "Yakında",
     shortDescription: "Tanıdık ezgilerin kişisel, sakin ve akustik yorumları.",
-    coverImage: "/muhammed-hero2.png",
+    coverImage: "/muhammed-hero2-site.jpg",
   },
 ].slice(0, 3);
 
@@ -51,8 +51,18 @@ export default function Home() {
       <Navbar />
 
       <section className="site-container pt-3 md:pt-4">
-        <div className="relative flex min-h-[calc(100vh-132px)] overflow-hidden rounded-[34px] border border-white/30 bg-white/8 shadow-[0_22px_70px_rgba(75,35,45,0.08)]">
-          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02)_0%,rgba(255,255,255,0.00)_48%,rgba(255,255,255,0.10)_100%)]" />
+        <div className="relative flex min-h-[calc(100vh-132px)] overflow-hidden rounded-[34px] border border-white/30 bg-[#99d9d2]/30 shadow-[0_22px_70px_rgba(75,35,45,0.08)]">
+          <Image
+            src="/muhammed-hero2-site.jpg"
+            alt=""
+            fill
+            priority
+            sizes="(max-width: 900px) 100vw, 1120px"
+            className="object-contain object-center md:object-cover md:object-center"
+            aria-hidden="true"
+          />
+
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0.00)_52%,rgba(255,255,255,0.14)_100%)]" />
 
           <div className="relative flex w-full flex-col justify-end p-4 md:p-6">
             <div className="rounded-[28px] border border-white/28 bg-white/14 p-3 shadow-[0_20px_60px_rgba(75,35,45,0.08)] backdrop-blur-[18px] md:p-4">
@@ -87,13 +97,6 @@ export default function Home() {
                       className="rounded-full border border-[#4B232D]/12 bg-white/68 px-4 py-2 text-[12px] font-bold text-[#4B232D] transition hover:-translate-y-0.5 hover:bg-white/86"
                     >
                       Tüm Şarkılar
-                    </Link>
-
-                    <Link
-                      href="/hakkinda"
-                      className="rounded-full border border-[#4B232D]/12 bg-white/68 px-4 py-2 text-[12px] font-bold text-[#4B232D] transition hover:-translate-y-0.5 hover:bg-white/86"
-                    >
-                      Hakkında
                     </Link>
                   </div>
                 </div>

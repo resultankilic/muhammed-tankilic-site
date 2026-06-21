@@ -62,7 +62,7 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -3;
-  background-image: url("/muhammed-hero2.png");
+  background-image: url("/muhammed-hero2-site.jpg");
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
@@ -949,42 +949,129 @@ b {
   }
 
   .page-shell {
-    padding-top: 12px;
+    padding-top: 8px;
+    padding-bottom: 24px;
+  }
+
+  .section-space {
+    padding: 24px 0;
   }
 
   .navbar-wrap {
-    top: 8px;
+    position: relative;
+    top: auto;
+    padding-bottom: 10px;
   }
 
   .navbar-shell {
     min-height: auto;
-    padding: 10px;
-    border-radius: 24px;
+    gap: 6px;
+    padding: 7px 8px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(16px);
+  }
+
+  .brand-link {
+    width: 100%;
+    gap: 8px;
   }
 
   .brand-mark {
-    width: 44px;
-    height: 44px;
-    flex: 0 0 44px;
-    border-radius: 16px;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    border-radius: 13px;
   }
 
   .brand-copy strong {
-    font-size: 13px;
+    font-size: 12px;
+    letter-spacing: -0.035em;
   }
 
   .brand-copy small {
-    font-size: 10px;
+    margin-top: 2px;
+    font-size: 9px;
   }
 
   .nav-side {
     display: none;
   }
 
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 2px;
+    padding: 3px;
+    overflow-x: auto;
+    background: rgba(255, 255, 255, 0.5);
+  }
+
   .nav-link {
-    min-height: 32px;
-    padding: 0 11px;
-    font-size: 11px;
+    min-height: 28px;
+    padding: 0 9px;
+    font-size: 10px;
+  }
+
+  .section-header {
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .section-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+  }
+
+  .section-title {
+    font-size: clamp(26px, 9vw, 36px);
+    line-height: 1;
+  }
+
+  .section-description {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .pill-button {
+    min-height: 36px;
+    width: auto;
+    padding: 9px 15px;
+    font-size: 12px;
+  }
+
+  .music-grid,
+  .feature-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .music-card {
+    border-radius: 24px;
+  }
+
+  .music-cover {
+    aspect-ratio: 1 / 0.72;
+    border-radius: 24px 24px 0 0;
+  }
+
+  .music-card-body {
+    padding: 16px;
+  }
+
+  .music-card-body h3 {
+    font-size: 24px;
+  }
+
+  .music-card-body p {
+    min-height: auto;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .card-actions {
+    margin-top: 16px;
   }
 
   .hero-section {
@@ -1007,6 +1094,11 @@ b {
     grid-template-columns: 1fr;
   }
 
+  .hero-actions {
+    align-items: flex-start;
+    flex-direction: row;
+  }
+
   .floating-release-card {
     left: 12px;
     right: 12px;
@@ -1022,24 +1114,34 @@ b {
     padding: 18px 10px 12px;
   }
 
-  .release-actions,
-  .hero-actions {
+  .release-actions {
     align-items: stretch;
     flex-direction: column;
-  }
-
-  .pill-button {
-    width: 100%;
   }
 
   .site-footer {
     align-items: flex-start;
     flex-direction: column;
-    padding-bottom: 10px;
+    gap: 8px;
+    padding-top: 18px;
+    padding-bottom: 6px;
+    font-size: 11px;
   }
 
   body::before {
     opacity: 1;
+    background-size: cover;
     background-position: center top;
+  }
+
+  .page-shell > section:first-of-type > div:first-child {
+    min-height: calc(100svh - 104px) !important;
+  }
+
+  .page-shell > section:first-of-type > div:first-child > img {
+    object-fit: contain !important;
+    object-position: center top !important;
+    transform: translateY(42px) scale(0.80);
+    transform-origin: top center;
   }
 }

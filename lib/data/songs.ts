@@ -6,7 +6,7 @@ export type MusicPlatform = {
 export type SongDownload = {
   label: string;
   fileUrl: string;
-  format: "MP3" | "WAV" | "MP4" | "PDF";
+  format: "MP3" | "WAV" | "MP4" | "PDF" | "IMAGE";
   requiresAuth: boolean;
   isActive: boolean;
 };
@@ -42,6 +42,20 @@ export type Song = {
   isPublished: boolean;
 };
 
+export type ArtistLink = {
+  name: "YouTube" | "Spotify" | "Apple Music" | "Instagram";
+  label: string;
+  url: string;
+};
+
+export const artistLinks: ArtistLink[] = [
+  {
+    name: "YouTube",
+    label: "YouTube Kanalı",
+    url: "https://youtube.com/@muhammedtanklc?si=duKwlo8rKCWNAO80",
+  },
+];
+
 export const songs: Song[] = [
   {
     slug: "zef-cara",
@@ -74,6 +88,10 @@ export const songs: Song[] = [
         name: "Apple Music",
         url: "https://music.apple.com/us/album/zef-cara-single/1779404301",
       },
+      {
+        name: "YouTube",
+        url: "https://youtu.be/-eXQX6gigvU?si=EUWVXD0_zwGsFJLt",
+      },
     ],
     downloads: [
       {
@@ -86,12 +104,12 @@ export const songs: Song[] = [
       {
         label: "Kapak Görseli",
         fileUrl: "/muzik/zef-cara-cover.jpg",
-        format: "PDF",
+        format: "IMAGE",
         requiresAuth: true,
         isActive: false,
       },
     ],
-    youtubeEmbedUrl: "",
+    youtubeEmbedUrl: "https://www.youtube.com/embed/-eXQX6gigvU",
     isLatest: true,
     isFeatured: true,
     isPublished: true,
