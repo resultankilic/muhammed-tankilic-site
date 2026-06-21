@@ -13,13 +13,14 @@ type ProfileForm = {
   bildirimIzni: boolean;
 };
 
-const profileItems = ["Ad soyad", "E-posta", "Bildirim tercihi"];
-
 const inputClass =
   "min-h-12 rounded-[20px] border border-[#4B232D]/12 bg-white/88 px-5 text-base font-medium tracking-[-0.02em] text-[#4B232D] outline-none shadow-[0_10px_28px_rgba(75,35,45,0.05)] transition placeholder:text-[#4B232D]/34 focus:border-[#F5AE50]/70 focus:bg-white focus:shadow-[0_0_0_4px_rgba(245,174,80,0.18)]";
 
 const labelClass =
   "text-[10px] font-bold uppercase tracking-[0.18em] text-[#4B232D]/64";
+
+const actionButtonClass =
+  "inline-flex min-h-12 w-full items-center justify-center rounded-full px-6 text-sm font-bold shadow-[0_16px_36px_rgba(75,35,45,0.16)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0";
 
 export default function ProfilDuzenlePage() {
   const [supabase] = useState(() => createClient());
@@ -149,7 +150,7 @@ export default function ProfilDuzenlePage() {
         <Navbar />
 
         <section className="site-container relative pt-7 md:pt-9">
-          <div className="rounded-[34px] border border-white/35 bg-white/62 p-8 text-center shadow-[0_22px_64px_rgba(75,35,45,0.10)] backdrop-blur-[18px]">
+          <div className="mx-auto max-w-4xl rounded-[34px] border border-white/35 bg-white/62 p-8 text-center shadow-[0_22px_64px_rgba(75,35,45,0.10)] backdrop-blur-[18px]">
             <p className="section-eyebrow">Profil</p>
 
             <h1 className="mt-3 text-[clamp(38px,4.6vw,62px)] font-semibold leading-none tracking-[-0.085em] text-[#4B232D]">
@@ -170,176 +171,128 @@ export default function ProfilDuzenlePage() {
           MUHAMMED
         </div>
 
-        <div className="relative z-10 grid gap-5 lg:grid-cols-2 lg:items-stretch">
-          <aside className="relative flex h-full overflow-hidden rounded-[34px] border border-white/18 bg-[#4B232D] p-7 text-white shadow-[0_24px_70px_rgba(75,35,45,0.18)] md:p-8">
-            <div className="absolute -right-24 top-8 h-56 w-56 rounded-full bg-[#F5AE50]/18 blur-3xl" />
-            <div className="absolute -bottom-28 left-8 h-56 w-56 rounded-full bg-[#BDEBE8]/12 blur-3xl" />
+        <section className="relative z-10 mx-auto max-w-5xl rounded-[38px] border border-white/35 bg-white/62 p-7 shadow-[0_24px_70px_rgba(75,35,45,0.12)] backdrop-blur-[18px] md:p-8">
+          <div className="text-center">
+            <p className="section-eyebrow">Profil ayarları</p>
 
-            <div className="relative flex w-full flex-col justify-between">
-              <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-white/66">
-                  Profil ayarları
-                </p>
+            <h1 className="mt-3 text-[clamp(48px,5.5vw,82px)] font-semibold leading-none tracking-[-0.095em] text-[#4B232D]">
+              Bilgilerini Değiştir
+            </h1>
 
-                <h1 className="mt-4 max-w-xl text-[clamp(38px,4.3vw,62px)] font-semibold leading-[0.94] tracking-[-0.085em]">
-                  Bilgilerini düzenle.
-                </h1>
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-8 text-[#4B232D]/68">
+              Ad, soyad, telefon, e-posta ve bildirim tercihini buradan
+              güncelleyebilirsin.
+            </p>
+          </div>
 
-                <p className="mt-5 max-w-lg text-sm leading-8 text-white/72">
-                  Ad, Soyad, Telefon ve Bildirim tercihlerini buradan
-                  güncelleyebilirsin--&gt;
-                </p>
+          <form onSubmit={handleSubmit} className="mt-7 grid gap-4">
+            <div className="rounded-[32px] border border-white/42 bg-white/58 p-5 shadow-[0_12px_34px_rgba(75,35,45,0.05)] backdrop-blur-[12px]">
+              <div className="grid gap-4 md:grid-cols-2">
+                <label className="grid gap-2">
+                  <span className={labelClass}>Adın</span>
 
-                <div className="mt-7 rounded-[26px] border border-white/16 bg-white/10 p-5 backdrop-blur-[14px]">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/54">
-                    Profilinde ne değişir?
-                  </p>
-
-                  <p className="mt-3 text-sm leading-7 text-white/74">
-                    Kaydettiğin bilgiler üyelik alanında ve özel içerik erişim
-                    tercihinde kullanılabilir.
-                  </p>
-                </div>
-
-                <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                  {profileItems.map((item) => (
-                    <div
-  key={item}
-  className="flex min-h-[82px] items-center rounded-[22px] border border-white/8 bg-white/[0.045] px-4 py-4 backdrop-blur-[12px]"
->
-  <h2 className="text-sm font-semibold leading-6 text-white/64">
-    {item}
-  </h2>
-</div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                <Link
-                  href="/hesabim"
-                  className="pill-button accent !min-h-12 !w-full !justify-center !px-6"
-                >
-                  Hesabıma Dön
-                </Link>
-
-                <Link
-                  href="/sarkilarim"
-                  className="pill-button accent !min-h-12 !w-full !justify-center !px-6"
-                >
-                  Şarkılarım
-                </Link>
-              </div>
-            </div>
-          </aside>
-
-          <section className="rounded-[34px] border border-white/35 bg-white/62 p-7 shadow-[0_22px_64px_rgba(75,35,45,0.10)] backdrop-blur-[18px] md:p-8">
-            <div className="mb-6 text-center">
-              <h2 className="text-[clamp(44px,4.8vw,70px)] font-semibold leading-none tracking-[-0.09em] text-[#4B232D]">
-                Profil bilgileri
-              </h2>
-            </div>
-
-            <form onSubmit={handleSubmit} className="grid gap-4">
-              <div className="rounded-[30px] border border-white/42 bg-white/58 p-5 shadow-[0_12px_34px_rgba(75,35,45,0.05)] backdrop-blur-[12px]">
-                <div className="grid gap-4 md:grid-cols-2">
-                  <label className="grid gap-2">
-                    <span className={labelClass}>Adın</span>
-
-                    <input
-                      value={form.ad}
-                      onChange={(event) =>
-                        setForm({ ...form, ad: event.target.value })
-                      }
-                      placeholder="Adını yaz"
-                      required
-                      className={inputClass}
-                    />
-                  </label>
-
-                  <label className="grid gap-2">
-                    <span className={labelClass}>Soyadın</span>
-
-                    <input
-                      value={form.soyad}
-                      onChange={(event) =>
-                        setForm({ ...form, soyad: event.target.value })
-                      }
-                      placeholder="Soyadını yaz"
-                      required
-                      className={inputClass}
-                    />
-                  </label>
-
-                  <label className="grid gap-2">
-                    <span className={labelClass}>Telefonun</span>
-
-                    <input
-                      value={form.telefon}
-                      onChange={(event) =>
-                        setForm({ ...form, telefon: event.target.value })
-                      }
-                      type="tel"
-                      placeholder="+90 5xx xxx xx xx"
-                      required
-                      className={inputClass}
-                    />
-                  </label>
-
-                  <label className="grid gap-2">
-                    <span className={labelClass}>E-postan</span>
-
-                    <input
-                      value={form.email}
-                      onChange={(event) =>
-                        setForm({ ...form, email: event.target.value })
-                      }
-                      type="email"
-                      placeholder="ornek@mail.com"
-                      required
-                      className={inputClass}
-                    />
-                  </label>
-                </div>
-              </div>
-
-              <div className="rounded-[24px] border border-white/42 bg-white/72 px-5 py-4 shadow-[0_10px_28px_rgba(75,35,45,0.05)] backdrop-blur-[12px]">
-                <label className="flex gap-3 text-sm leading-7 text-[#4B232D]/72">
                   <input
-                    type="checkbox"
-                    checked={form.bildirimIzni}
+                    value={form.ad}
                     onChange={(event) =>
-                      setForm({
-                        ...form,
-                        bildirimIzni: event.target.checked,
-                      })
+                      setForm({ ...form, ad: event.target.value })
                     }
-                    className="mt-1 h-4 w-4 rounded border-[#4B232D]/30 accent-[#4B232D]"
+                    placeholder="Adını yaz"
+                    required
+                    className={inputClass}
                   />
+                </label>
 
-                  <span>
-                    Yeni şarkılar ve özel içerikler yayınlandığında e-posta
-                    almak istiyorum.
-                  </span>
+                <label className="grid gap-2">
+                  <span className={labelClass}>Soyadın</span>
+
+                  <input
+                    value={form.soyad}
+                    onChange={(event) =>
+                      setForm({ ...form, soyad: event.target.value })
+                    }
+                    placeholder="Soyadını yaz"
+                    required
+                    className={inputClass}
+                  />
+                </label>
+
+                <label className="grid gap-2">
+                  <span className={labelClass}>Telefonun</span>
+
+                  <input
+                    value={form.telefon}
+                    onChange={(event) =>
+                      setForm({ ...form, telefon: event.target.value })
+                    }
+                    type="tel"
+                    placeholder="+90 5xx xxx xx xx"
+                    required
+                    className={inputClass}
+                  />
+                </label>
+
+                <label className="grid gap-2">
+                  <span className={labelClass}>E-postan</span>
+
+                  <input
+                    value={form.email}
+                    onChange={(event) =>
+                      setForm({ ...form, email: event.target.value })
+                    }
+                    type="email"
+                    placeholder="ornek@mail.com"
+                    required
+                    className={inputClass}
+                  />
                 </label>
               </div>
+            </div>
+
+            <div className="rounded-[26px] border border-white/42 bg-white/72 px-5 py-4 shadow-[0_10px_28px_rgba(75,35,45,0.05)] backdrop-blur-[12px]">
+              <label className="flex gap-3 text-sm leading-7 text-[#4B232D]/72">
+                <input
+                  type="checkbox"
+                  checked={form.bildirimIzni}
+                  onChange={(event) =>
+                    setForm({
+                      ...form,
+                      bildirimIzni: event.target.checked,
+                    })
+                  }
+                  className="mt-1 h-4 w-4 rounded border-[#4B232D]/30 accent-[#4B232D]"
+                />
+
+                <span>
+                  Yeni şarkılar ve özel içerikler yayınlandığında e-posta almak
+                  istiyorum.
+                </span>
+              </label>
+            </div>
+
+            {message ? (
+              <p className="rounded-[22px] border border-[#BDEBE8]/80 bg-[#BDEBE8]/45 px-5 py-4 text-sm font-semibold leading-7 text-[#4B232D] shadow-[0_10px_28px_rgba(75,35,45,0.05)]">
+                {message}
+              </p>
+            ) : null}
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link
+                href="/hesabim"
+                className={`${actionButtonClass} bg-[#F5AE50] text-[#4B232D] hover:bg-[#f7bb67]`}
+              >
+                ← Hesabıma Dön
+              </Link>
 
               <button
                 type="submit"
                 disabled={saving}
-                className="min-h-14 rounded-full bg-[#4B232D] px-6 text-sm font-bold text-white shadow-[0_16px_36px_rgba(75,35,45,0.20)] transition hover:-translate-y-0.5 hover:bg-[#5a2b36] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
+                className={`${actionButtonClass} bg-[#4B232D] text-white hover:bg-[#5a2b36]`}
               >
                 {saving ? "Kaydediliyor..." : "Değişiklikleri Kaydet"}
               </button>
-
-              {message ? (
-                <p className="rounded-[22px] border border-[#BDEBE8]/80 bg-[#BDEBE8]/45 px-5 py-4 text-sm font-semibold leading-7 text-[#4B232D] shadow-[0_10px_28px_rgba(75,35,45,0.05)]">
-                  {message}
-                </p>
-              ) : null}
-            </form>
-          </section>
-        </div>
+            </div>
+          </form>
+        </section>
       </section>
     </main>
   );

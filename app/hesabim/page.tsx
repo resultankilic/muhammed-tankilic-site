@@ -13,6 +13,25 @@ type UserInfo = {
   bildirimIzni: boolean;
 };
 
+const profileItems = [
+  {
+    label: "Ad Soyad",
+    key: "fullName",
+  },
+  {
+    label: "E-posta",
+    key: "email",
+  },
+  {
+    label: "Telefon",
+    key: "telefon",
+  },
+  {
+    label: "Bildirimler",
+    key: "bildirim",
+  },
+];
+
 export default function HesabimPage() {
   const [supabase] = useState(() => createClient());
   const [loading, setLoading] = useState(true);
@@ -59,19 +78,27 @@ export default function HesabimPage() {
     loadUser();
   }, [supabase]);
 
+  const fullName = `${userInfo?.ad || ""} ${userInfo?.soyad || ""}`.trim();
+
+  function getProfileValue(key: string) {
+    if (key === "fullName") return fullName || "-";
+    if (key === "email") return userInfo?.email || "-";
+    if (key === "telefon") return userInfo?.telefon || "-";
+    if (key === "bildirim") return userInfo?.bildirimIzni ? "Açık" : "Kapalı";
+
+    return "-";
+  }
+
   if (loading) {
     return (
       <main className="page-shell">
         <Navbar />
 
-        <section
-          className="site-container flex items-center justify-center py-8"
-          style={{ minHeight: "calc(100vh - 160px)" }}
-        >
-          <div className="soft-card p-6 text-center">
-            <p className="section-eyebrow mb-2">Hesap</p>
+        <section className="site-container relative pt-7 md:pt-9">
+          <div className="mx-auto max-w-4xl rounded-[34px] border border-white/35 bg-white/62 p-8 text-center shadow-[0_22px_64px_rgba(75,35,45,0.10)] backdrop-blur-[18px]">
+            <p className="section-eyebrow">Hesabım</p>
 
-            <h1 className="font-serif text-4xl font-bold tracking-tighter text-(--burgundy)">
+            <h1 className="mt-3 text-[clamp(38px,4.6vw,62px)] font-semibold leading-none tracking-[-0.085em] text-[#4B232D]">
               Bilgiler yükleniyor...
             </h1>
           </div>
@@ -84,122 +111,75 @@ export default function HesabimPage() {
     <main className="page-shell">
       <Navbar />
 
-      <section className="site-container pt-6 md:pt-8">
-        <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
-          <aside className="dark-card p-5 md:p-6">
-            <p className="text-[10px] font-extrabold uppercase tracking-widest text-white/60">
-              Kullanıcı Paneli
-            </p>
+      <section className="site-container relative pt-7 md:pt-9">
+        <div className="pointer-events-none absolute left-1/2 top-5 -z-0 -translate-x-1/2 select-none text-[clamp(78px,12vw,170px)] font-black leading-none tracking-[-0.12em] text-white/70">
+          MUHAMMED
+        </div>
 
-            <h1 className="mt-3 font-serif text-4xl font-bold leading-none tracking-tighter text-white md:text-5xl">
+        <section className="relative z-10 mx-auto max-w-5xl rounded-[38px] border border-white/35 bg-white/62 p-7 shadow-[0_24px_70px_rgba(75,35,45,0.12)] backdrop-blur-[18px] md:p-8">
+          <div className="text-center">
+            <p className="section-eyebrow">Kullanıcı paneli</p>
+
+            <h1 className="mt-3 text-[clamp(54px,6vw,88px)] font-semibold leading-none tracking-[-0.095em] text-[#4B232D]">
               Hesabım
             </h1>
 
-            <p className="mt-4 max-w-md text-sm leading-7 text-white/72">
-              Üyelik bilgilerini, bildirim tercihlerini ve özel içerik erişimini
-              buradan takip edebilirsin.
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-8 text-[#4B232D]/68">
+              Üyelik bilgilerini, bildirim tercihini ve hesap erişimini buradan
+              takip edebilirsin.
             </p>
+          </div>
 
-            <div className="mt-6 flex flex-wrap gap-2">
-              <Link href="/hesabim/duzenle" className="pill-button">
-                Bilgilerimi Düzenle
-              </Link>
-
-              <Link href="/sarkilarim" className="pill-button secondary">
-                Şarkılara Git
-              </Link>
-            </div>
-          </aside>
-
-          <section className="soft-card p-5 md:p-6">
-            <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-              <div>
-                <p className="section-eyebrow mb-2">Profil</p>
-
-                <h2 className="font-serif text-4xl font-bold tracking-tighter text-(--burgundy) md:text-5xl">
-                  Profil bilgileri
-                </h2>
-
-                <p className="mt-3 max-w-xl text-sm leading-6 text-[rgba(75,35,45,0.7)]">
-                  Hesabına bağlı temel kullanıcı bilgileri.
-                </p>
-              </div>
-
-              <Link href="/" className="pill-button secondary w-fit">
-                Ana Sayfa
-              </Link>
-            </div>
-
-            {message && (
-              <p className="mt-5 rounded-[25px] bg-(--mint-soft) px-4 py-3 text-sm text-(--burgundy)">
-                {message}
-              </p>
-            )}
-
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              <ProfileBox
-                label="Ad Soyad"
-                value={`${userInfo?.ad || "-"} ${userInfo?.soyad || ""}`.trim()}
-              />
-
-              <ProfileBox label="E-posta" value={userInfo?.email || "-"} />
-
-              <ProfileBox label="Telefon" value={userInfo?.telefon || "-"} />
-
-              <ProfileBox
-                label="E-posta Bildirimleri"
-                value={userInfo?.bildirimIzni ? "Açık" : "Kapalı"}
-              />
-            </div>
-          </section>
-        </div>
-      </section>
-
-      <section className="site-container py-6">
-        <div className="grid gap-4 md:grid-cols-3">
-          <article className="soft-card p-5">
-            <p className="section-eyebrow mb-2">Erişim</p>
-
-            <h3 className="font-serif text-3xl font-bold tracking-tighter text-(--burgundy)">
-              Özel içerikler
-            </h3>
-
-            <p className="mt-3 text-sm leading-6 text-[rgba(75,35,45,0.68)]">
-              Şarkı sözleri, özel kayıtlar ve indirme bağlantıları burada
-              açılacak.
+          {message ? (
+            <p className="mt-6 rounded-[22px] border border-red-200 bg-red-50 px-5 py-4 text-sm font-semibold leading-7 text-red-700 shadow-[0_10px_28px_rgba(75,35,45,0.05)]">
+              {message}
             </p>
+          ) : null}
 
-            <Link href="/sarkilarim" className="mt-5 inline-flex text-sm font-extrabold text-(--burgundy)">
-              Müzik arşivine git →
-            </Link>
-          </article>
+          <div className="mt-7 rounded-[32px] border border-white/42 bg-white/58 p-5 shadow-[0_12px_34px_rgba(75,35,45,0.05)] backdrop-blur-[12px]">
+            <div className="grid gap-4 sm:grid-cols-2">
+              {profileItems.map((item) => (
+                <ProfileBox
+                  key={item.key}
+                  label={item.label}
+                  value={getProfileValue(item.key)}
+                />
+              ))}
+            </div>
+          </div>
 
-          <article className="soft-card p-5">
-            <p className="section-eyebrow mb-2">İndirmeler</p>
-
-            <h3 className="font-serif text-3xl font-bold tracking-tighter text-(--burgundy)">
-              Şarkılar
-            </h3>
-
-            <p className="mt-3 text-sm leading-6 text-[rgba(75,35,45,0.68)]">
-              İndirme geçmişi ve izin verilen dosyalar daha sonra burada
+          <div className="mt-5 rounded-[26px] border border-white/42 bg-[#FFF4BC]/70 px-5 py-4 shadow-[0_10px_28px_rgba(75,35,45,0.05)] backdrop-blur-[12px]">
+            <p className="text-center text-sm font-medium leading-7 text-[#4B232D]/72">
+              Profil bilgilerini değiştirmek için hesap düzenleme alanını
+              kullanabilirsin. İndirilenler bölümü üyelik alanında ayrıca
               gösterilecek.
             </p>
-          </article>
+          </div>
 
-          <article className="soft-card p-5">
-            <p className="section-eyebrow mb-2">Arşiv</p>
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+  <Link
+    href="/"
+    className="pill-button accent !min-h-12 !w-full !justify-center !px-5"
+  >
+    ← Ana Sayfaya Git
+  </Link>
 
-            <h3 className="font-serif text-3xl font-bold tracking-tighter text-(--burgundy)">
-              Yazılar / notlar
-            </h3>
+  <Link
+    href="/hesabim/duzenle"
+    className="pill-button dark !min-h-12 !w-full !justify-center !px-5"
+  >
+    Bilgileri Düzenle
+  </Link>
 
-            <p className="mt-3 text-sm leading-6 text-[rgba(75,35,45,0.68)]">
-              Şarkı hikâyeleri, söz açıklamaları ve özel notlar üyelik alanına
-              eklenebilir.
-            </p>
-          </article>
-        </div>
+  <button
+    type="button"
+    className="pill-button accent !min-h-12 !w-full !justify-center !px-5"
+    title="İndirilenler alanı yakında aktif olacak."
+  >
+    İndirilenlere Git →
+  </button>
+</div>
+        </section>
       </section>
     </main>
   );
@@ -207,12 +187,12 @@ export default function HesabimPage() {
 
 function ProfileBox({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[25px] border border-[rgba(75,35,45,0.08)] bg-white/55 p-4">
-      <p className="text-[10px] font-extrabold uppercase tracking-widest text-[rgba(75,35,45,0.48)]">
+    <div className="rounded-[24px] border border-white/42 bg-white/72 px-5 py-4 shadow-[0_10px_28px_rgba(75,35,45,0.05)] backdrop-blur-[12px]">
+      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#4B232D]/54">
         {label}
       </p>
 
-      <p className="mt-2 wrap-break-word text-sm font-bold text-(--burgundy)">
+      <p className="mt-2 break-words text-sm font-bold leading-7 text-[#4B232D]">
         {value || "-"}
       </p>
     </div>
