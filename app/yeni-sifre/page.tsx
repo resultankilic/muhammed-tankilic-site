@@ -53,24 +53,55 @@ export default function NewPasswordPage() {
 
     const supabase = createClient();
 
-    const { error } = await supabase.auth.updateUser({
-      password,
+    const {
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession();
+
+    if (sessionError || !session?.access_token) {
+      setIsSubmitting(false);
+      setMessage({
+        type: "error",
+        text: "Şifre güncelleme oturumu bulunamadı. Lütfen yeniden şifre sıfırlama bağlantısı iste.",
+      });
+      return;
+    }
+
+    const response = await fetch("/api/auth/update-password", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session.access_token}`,
+      },
+      body: JSON.stringify({
+        password,
+      }),
     });
+
+    const result = (await response.json()) as {
+      ok?: boolean;
+      message?: string;
+      error?: string;
+    };
 
     setIsSubmitting(false);
 
-    if (error) {
+    if (!response.ok || !result.ok) {
       setMessage({
         type: "error",
-        text: "Şifre güncellenemedi. Bağlantının süresi dolmuş olabilir. Yeniden şifre sıfırlama bağlantısı iste.",
+        text:
+          result.error ??
+          "Şifre güncellenemedi. Lütfen yeniden şifre sıfırlama bağlantısı iste.",
       });
       return;
     }
 
     setMessage({
       type: "success",
-      text: "Şifren güncellendi. Giriş sayfasına yönlendiriliyorsun.",
+      text: result.message ?? "Şifren güncellendi. Giriş sayfasına yönlendiriliyorsun.",
     });
+
+    await supabase.auth.signOut();
 
     setTimeout(() => {
       router.refresh();
