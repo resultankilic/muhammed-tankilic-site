@@ -1,36 +1,67 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Hakkında | Muhammed Tankılıç",
   description:
-    "Muhammed Tankılıç’ın müzik yolculuğu, Kürtçe akustik şarkıları, sözleri ve sanatçı kimliği.",
+    "Muhammed Tankılıç’ın müzik dili, besteleri, cover yorumları ve platform arşivi.",
 };
 
-const highlights = [
+const identityCards = [
   {
     label: "Dil",
-    value: "Kürtçe",
-    description: "Şarkıların ana dili ve duygu zemini.",
+    title: "Kürtçe",
+    description: "Şarkılarımın ana dili ve duygu zemini.",
   },
   {
     label: "Tarz",
-    value: "Akustik Folk",
-    description: "Sade gitar, yalın yorum ve modern kayıt hissi.",
+    title: "Akustik Folk",
+    description: "Sade gitar, yalın yorum ve doğal kayıt hissi.",
   },
   {
     label: "Odak",
-    value: "Söz ve Hikâye",
-    description: "Anlamlı sözler, kişisel anlatım ve doğal atmosfer.",
+    title: "Söz ve Hikâye",
+    description: "Bestelerimde anlam, duygu ve kişisel anlatım önde.",
   },
 ];
 
-const values = [
-  "Kürtçe müziği sade, modern ve duygu odaklı bir çizgide sunmak.",
-  "Şarkı sözlerinde kişisel hikâyeleri ve güçlü duyguları öne çıkarmak.",
-  "Akustik gitar merkezli, ferah ve samimi bir müzik dili kurmak.",
+const productionCards = [
+  {
+    label: "Bestelerim",
+    title: "Resmi yayınlarım",
+    description:
+      "Kendi yazdığım ve bestelediğim şarkılarımı Spotify ve Apple Music gibi platformlarda yayınlıyorum.",
+    href: "/sarkilarim",
+    button: "Şarkılarım",
+  },
+  {
+    label: "Coverlarım",
+    title: "Yorum videolarım",
+    description:
+      "Sevdiğim eserleri kendi yorumumla YouTube ve Instagram odaklı video içerikleri olarak paylaşıyorum.",
+    href: "/coverlarim",
+    button: "Coverlarım",
+  },
+];
+
+const platformCards = [
+  {
+    platform: "Spotify",
+    description: "Kendi bestelerimi dinleyebileceğiniz ana müzik platformlarımdan biri.",
+  },
+  {
+    platform: "Apple Music",
+    description: "Resmi yayınlarımın yer aldığı dijital müzik platformu.",
+  },
+  {
+    platform: "YouTube",
+    description: "Cover yorumlarım, performans videolarım ve ileride beste videolarım.",
+  },
+  {
+    platform: "Instagram",
+    description: "Kısa performanslarım, duyurularım, cover kesitlerim ve postlarım.",
+  },
 ];
 
 export default function AboutPage() {
@@ -39,18 +70,20 @@ export default function AboutPage() {
       <Navbar />
 
       <section className="site-container pt-3 md:pt-4">
-        <div className="relative overflow-hidden rounded-[34px] border border-white/35 bg-white/54 p-5 shadow-[0_22px_70px_rgba(75,35,45,0.11)] backdrop-blur-[14px] md:p-8 lg:p-10">
+        <div className="relative overflow-hidden rounded-[34px] border border-white/35 bg-white/56 p-5 shadow-[0_22px_70px_rgba(75,35,45,0.11)] backdrop-blur-[14px] md:p-8 lg:p-10">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_8%,rgba(189,235,232,0.22),transparent_34%),radial-gradient(circle_at_88%_14%,rgba(245,174,80,0.13),transparent_30%)]" />
 
-          <div className="relative grid gap-8 lg:grid-cols-[1.03fr_0.97fr] lg:items-center">
+          <div className="relative grid gap-8 lg:grid-cols-[1fr_0.86fr] lg:items-center">
             <div>
               <div className="mb-5 flex flex-wrap gap-2">
                 <span className="rounded-full bg-[#BDEBE8]/76 px-4 py-2 text-[11px] font-semibold text-[#4B232D]">
                   Bağımsız Sanatçı
                 </span>
+
                 <span className="rounded-full bg-white/62 px-4 py-2 text-[11px] font-semibold text-[#4B232D]/72">
                   Kürtçe Müzik
                 </span>
+
                 <span className="rounded-full bg-white/62 px-4 py-2 text-[11px] font-semibold text-[#4B232D]/72">
                   Akustik Folk
                 </span>
@@ -58,52 +91,48 @@ export default function AboutPage() {
 
               <p className="section-eyebrow">Hakkında</p>
 
-              <h1 className="max-w-3xl text-[clamp(44px,6vw,74px)] font-semibold leading-[0.94] tracking-[-0.08em] text-[#4B232D]">
-                Kürtçe akustik müziğin sade ve kişisel sesi.
+              <h1 className="max-w-3xl text-[clamp(44px,6vw,76px)] font-semibold leading-[0.94] tracking-[-0.08em] text-[#4B232D]">
+                Müziğimi söz, duygu ve hikâye üzerine kuruyorum.
               </h1>
 
               <p className="mt-5 max-w-2xl text-[14px] leading-7 text-[#4B232D]/76 md:text-[15px]">
-                Muhammed Tankılıç, Kürtçe şarkı söyleyen bağımsız bir sanatçı
-                olarak müziğini sade melodiler, akustik düzenlemeler ve kişisel
-                hikâyeler üzerine kurar. Şarkılarında hem anlamlı sözleri hem de
-                kulağa hoş gelen modern bir akustik atmosferi öne çıkarır.
+                Kürtçe şarkılarımı sade melodiler, akustik düzenlemeler ve
+                kişisel hikâyeler etrafında üretiyorum. Bestelerimde anlamlı
+                sözleri, doğal bir yorumu ve kulağa hoş gelen modern bir
+                akustik atmosferi öne çıkarmaya çalışıyorum.
               </p>
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link href="/sarkilarim" className="pill-button">
-                  Şarkıları Dinle
+                  Şarkılarımı Dinle
                 </Link>
 
-                <Link href="/iletisim" className="pill-button secondary">
-                  İletişim
+                <Link href="/coverlarim" className="pill-button secondary">
+                  Coverlarım
                 </Link>
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-[32px] border border-white/28 bg-white/32 p-4 shadow-[0_20px_58px_rgba(75,35,45,0.13)] backdrop-blur-[12px]">
-              <div className="relative aspect-[4/4.6] overflow-hidden rounded-[26px] border border-white/24 bg-[#BDEBE8]/34">
-                <Image
-                  src="/muhammed-hero2-site.jpg"
-                  alt="Muhammed Tankılıç gitar ile"
-                  fill
-                  priority
-                  sizes="(max-width: 900px) 100vw, 440px"
-                  className="object-contain object-center"
-                />
-              </div>
+            <div className="rounded-[30px] border border-white/30 bg-[#4B232D]/88 p-7 text-white shadow-[0_20px_58px_rgba(75,35,45,0.16)] backdrop-blur-[12px]">
+              <p className="section-eyebrow light">Sanatçı Kimliğim</p>
 
-              <div className="mt-4 rounded-[24px] border border-white/24 bg-white/54 p-5 shadow-[0_18px_50px_rgba(75,35,45,0.10)] backdrop-blur-[14px]">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#4B232D]/56">
-                  Sanatçı Kimliği
-                </p>
+              <h2 className="text-[clamp(30px,3.6vw,48px)] font-semibold leading-none tracking-[-0.075em] text-white">
+                Bestelerim ve cover yorumlarım ayrı arşivlerde.
+              </h2>
 
-                <h2 className="mt-2 text-[28px] font-semibold leading-none tracking-[-0.065em] text-[#4B232D]">
-                  Muhammed Tankılıç
-                </h2>
+              <p className="mt-5 text-sm leading-7 text-white/70">
+                Kendi bestelerimi Şarkılarım bölümünde; YouTube ve Instagram
+                odaklı cover yorumlarımı ise Coverlarım bölümünde topluyorum.
+              </p>
 
-                <p className="mt-3 text-sm leading-6 text-[#4B232D]/68">
-                  Kürtçe akustik müzik · Sözler · Hikâyeler
-                </p>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Link href="/sarkilarim" className="pill-button">
+                  Şarkılarım
+                </Link>
+
+                <Link href="/coverlarim" className="pill-button outline-light">
+                  Coverlarım
+                </Link>
               </div>
             </div>
           </div>
@@ -112,7 +141,7 @@ export default function AboutPage() {
 
       <section className="site-container section-space">
         <div className="grid gap-4 md:grid-cols-3">
-          {highlights.map((item) => (
+          {identityCards.map((item) => (
             <article
               key={item.label}
               className="rounded-[30px] border border-[#4B232D]/10 bg-white/56 p-7 shadow-[0_18px_50px_rgba(75,35,45,0.08)] backdrop-blur-[14px]"
@@ -120,7 +149,7 @@ export default function AboutPage() {
               <p className="section-eyebrow">{item.label}</p>
 
               <h2 className="text-[32px] font-semibold leading-none tracking-[-0.065em] text-[#4B232D]">
-                {item.value}
+                {item.title}
               </h2>
 
               <p className="mt-4 text-sm leading-7 text-[#4B232D]/68">
@@ -132,41 +161,67 @@ export default function AboutPage() {
       </section>
 
       <section className="site-container section-space">
-        <div className="grid gap-4 lg:grid-cols-[0.95fr_1.05fr]">
-          <article className="rounded-[34px] border border-white/35 bg-white/56 p-7 shadow-[0_18px_50px_rgba(75,35,45,0.08)] backdrop-blur-[14px] md:p-9">
-            <p className="section-eyebrow">Müzik Dili</p>
+        <div className="grid gap-4 lg:grid-cols-2">
+          {productionCards.map((item) => (
+            <article
+              key={item.label}
+              className="flex min-h-[300px] flex-col justify-between rounded-[34px] border border-white/35 bg-white/56 p-7 shadow-[0_18px_50px_rgba(75,35,45,0.08)] backdrop-blur-[14px] md:p-9"
+            >
+              <div>
+                <p className="section-eyebrow">{item.label}</p>
 
-            <h2 className="section-title">Doğal, sade ve kişisel.</h2>
+                <h2 className="text-[clamp(34px,4vw,52px)] font-semibold leading-none tracking-[-0.075em] text-[#4B232D]">
+                  {item.title}
+                </h2>
 
-            <p className="mt-5 text-sm leading-8 text-[#4B232D]/70">
-              Muhammed Tankılıç’ın müzik yaklaşımı; sade akustik gitar, güçlü
-              söz anlatımı ve doğal bir yorum etrafında şekillenir. Şarkılar,
-              fazla süslenmiş bir prodüksiyondan çok, hissin ve hikâyenin öne
-              çıktığı bir atmosfer kurmayı hedefler.
-            </p>
+                <p className="mt-5 max-w-xl text-sm leading-8 text-[#4B232D]/70">
+                  {item.description}
+                </p>
+              </div>
 
-            <p className="mt-4 text-sm leading-8 text-[#4B232D]/70">
-              Bu yüzden müziğinde pastoral bir sakinlik, modern bir kayıt dili
-              ve Kürtçe sözlerin taşıdığı derin duygu birlikte hissedilir.
-            </p>
-          </article>
+              <div className="mt-7">
+                <Link href={item.href} className="pill-button dark">
+                  {item.button}
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
-          <article className="rounded-[34px] border border-[#4B232D]/10 bg-[#FFF4BC]/72 p-7 shadow-[0_18px_50px_rgba(75,35,45,0.08)] backdrop-blur-[14px] md:p-9">
-            <p className="section-eyebrow">Yaklaşım</p>
+      <section className="site-container section-space">
+        <div className="rounded-[34px] border border-white/35 bg-[#FFF4BC]/74 p-7 shadow-[0_18px_50px_rgba(75,35,45,0.08)] backdrop-blur-[14px] md:p-9">
+          <div className="section-header">
+            <div>
+              <p className="section-eyebrow">Platformlarım</p>
 
-            <h2 className="section-title">Neyi öne çıkarır?</h2>
+              <h2 className="section-title">
+                Nerede ne paylaşıyorum?
+              </h2>
 
-            <div className="mt-6 grid gap-3">
-              {values.map((value) => (
-                <div
-                  key={value}
-                  className="rounded-2xl border border-[#4B232D]/10 bg-white/48 px-5 py-4 text-sm leading-7 text-[#4B232D]/74"
-                >
-                  {value}
-                </div>
-              ))}
+              <p className="section-description">
+                Bestelerim, cover yorumlarım ve güncel paylaşımlarım platformlara
+                göre ayrı bir düzenle ilerliyor.
+              </p>
             </div>
-          </article>
+          </div>
+
+          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+            {platformCards.map((item) => (
+              <article
+                key={item.platform}
+                className="rounded-[24px] border border-[#4B232D]/10 bg-white/52 p-5 shadow-[0_14px_36px_rgba(75,35,45,0.06)]"
+              >
+                <h3 className="text-[24px] font-semibold leading-none tracking-[-0.065em] text-[#4B232D]">
+                  {item.platform}
+                </h3>
+
+                <p className="mt-4 text-sm leading-7 text-[#4B232D]/68">
+                  {item.description}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -174,25 +229,25 @@ export default function AboutPage() {
         <div className="rounded-[34px] border border-white/35 bg-[#4B232D]/88 p-7 text-white shadow-[0_18px_50px_rgba(75,35,45,0.14)] backdrop-blur-[14px] md:p-9">
           <div className="grid gap-6 lg:grid-cols-[1fr_0.8fr] lg:items-center">
             <div>
-              <p className="section-eyebrow light">Müzik Arşivi</p>
+              <p className="section-eyebrow light">Arşivim</p>
 
               <h2 className="text-[clamp(32px,4vw,52px)] font-semibold leading-none tracking-[-0.075em] text-white">
-                Şarkıları ve hikâyeleri keşfet.
+                Şarkılarım ve coverlarım ayrı ayrı ilerliyor.
               </h2>
 
               <p className="mt-5 max-w-2xl text-sm leading-7 text-white/70">
-                Yayınlanan şarkılar, platform bağlantıları, hikâye notları ve
-                ileride eklenecek özel içerikler müzik sayfasında yer alır.
+                Kendi bestelerim resmi müzik yayınlarımda; cover yorumlarım ise
+                video odaklı arşivimde yer alıyor.
               </p>
             </div>
 
             <div className="flex flex-wrap gap-3 lg:justify-end">
               <Link href="/sarkilarim" className="pill-button">
-                Müzik Sayfası
+                Şarkılarım
               </Link>
 
               <Link href="/coverlarim" className="pill-button outline-light">
-                Videolar
+                Coverlarım
               </Link>
             </div>
           </div>
@@ -201,7 +256,7 @@ export default function AboutPage() {
 
       <footer className="site-container site-footer">
         <p>© 2026 Muhammed Tankılıç. Tüm hakları saklıdır.</p>
-        <span>Hakkında · Kürtçe müzik · Akustik hikâyeler</span>
+        <span>Hakkında · Bestelerim · Coverlarım</span>
       </footer>
     </main>
   );
