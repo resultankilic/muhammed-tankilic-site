@@ -118,11 +118,11 @@ export default async function AdminCoversPage() {
               </Link>
 
               <Link
-  href="/admin/coverlar/yeni"
-  className="inline-flex min-h-10 items-center justify-center rounded-full bg-[#4B232D] px-4 text-[11px] font-bold text-white shadow-[0_10px_22px_rgba(75,35,45,0.18)] transition hover:-translate-y-0.5 hover:bg-[#5a2b36] md:text-xs"
->
-  Yeni Cover Ekle
-</Link>
+                href="/admin/coverlar/yeni"
+                className="inline-flex min-h-10 items-center justify-center rounded-full bg-[#4B232D] px-4 text-[11px] font-bold text-white shadow-[0_10px_22px_rgba(75,35,45,0.18)] transition hover:-translate-y-0.5 hover:bg-[#5a2b36] md:text-xs"
+              >
+                Yeni Cover Ekle
+              </Link>
             </div>
           </div>
 
@@ -175,27 +175,28 @@ export default async function AdminCoversPage() {
               </p>
 
               <p className="mx-auto mt-3 max-w-xl text-[12px] leading-7 text-[#4B232D]/65 md:text-sm">
-                Bir sonraki adımda “Yeni Cover Ekle” formunu oluşturup cover
-                videolarını admin panelden kaydedeceğiz.
+                “Yeni Cover Ekle” formuyla YouTube ve Instagram cover
+                videolarını admin panelden kaydedebilirsin.
               </p>
             </div>
           ) : null}
 
           {!error && covers.length > 0 ? (
             <div className="mt-6 overflow-hidden rounded-[24px] border border-white/42 bg-white/62 shadow-[0_10px_28px_rgba(75,35,45,0.06)] backdrop-blur-[12px]">
-              <div className="hidden grid-cols-[1.3fr_0.8fr_0.7fr_0.7fr_0.7fr] gap-3 border-b border-[#4B232D]/10 px-5 py-4 text-[10px] font-bold uppercase tracking-[0.16em] text-[#4B232D]/45 md:grid">
+              <div className="hidden grid-cols-[1.2fr_0.65fr_0.6fr_0.65fr_0.75fr_0.65fr] gap-3 border-b border-[#4B232D]/10 px-5 py-4 text-[10px] font-bold uppercase tracking-[0.16em] text-[#4B232D]/45 md:grid">
                 <span>Cover</span>
                 <span>Durum</span>
                 <span>YouTube</span>
                 <span>Instagram</span>
                 <span>Güncelleme</span>
+                <span>İşlem</span>
               </div>
 
               <div className="divide-y divide-[#4B232D]/10">
                 {covers.map((cover) => (
                   <article
                     key={cover.id}
-                    className="grid gap-4 px-5 py-5 md:grid-cols-[1.3fr_0.8fr_0.7fr_0.7fr_0.7fr] md:items-center md:gap-3"
+                    className="grid gap-4 px-5 py-5 md:grid-cols-[1.2fr_0.65fr_0.6fr_0.65fr_0.75fr_0.65fr] md:items-center md:gap-3"
                   >
                     <div>
                       <h2 className="text-xl font-semibold tracking-[-0.055em] text-[#4B232D]">
@@ -255,6 +256,15 @@ export default async function AdminCoversPage() {
 
                     <div className="text-[12px] font-bold text-[#4B232D]/65">
                       {formatDate(cover.updated_at)}
+                    </div>
+
+                    <div>
+                      <Link
+                        href={`/admin/coverlar/${cover.id}/duzenle`}
+                        className="inline-flex min-h-9 items-center justify-center rounded-full border border-[#4B232D]/10 bg-white/75 px-4 text-[11px] font-bold text-[#4B232D]/75 transition hover:-translate-y-0.5 hover:bg-white"
+                      >
+                        Düzenle
+                      </Link>
                     </div>
                   </article>
                 ))}
