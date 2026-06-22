@@ -386,7 +386,7 @@ export default async function SongDetailPage({ params }: SongDetailPageProps) {
 
       <footer className="site-container site-footer">
         <p>© 2026 Muhammed Tankılıç. Tüm hakları saklıdır.</p>
-        <span>{song.title} · Şarkılarım · Bestem</span>
+        <span>Resul Tankılıç Tarafından Tasarlanmıştır.</span>
       </footer>
     </main>
   );

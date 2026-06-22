@@ -13,8 +13,7 @@ const covers = [
     slug: "pela-dur",
     title: "Pela Dur",
     artist: "Muhammed Tankılıç",
-    description:
-      "YouTube kanalımda paylaştığım akustik gitar cover yorumum.",
+    description: "YouTube kanalımda paylaştığım akustik gitar cover yorumum.",
     youtubeUrl: "https://youtu.be/-eXQX6gigvU?si=XKi-bIJPd5X5BDo_",
     youtubeEmbedUrl: "https://www.youtube.com/embed/-eXQX6gigvU",
   },
@@ -22,9 +21,73 @@ const covers = [
 
 const youtubeChannelUrl = "https://www.youtube.com/@Muhammedtanklc";
 
-function CoverPanel({ cover }: { cover: (typeof covers)[number] }) {
+const mobileButtonClass =
+  "inline-flex min-h-9 w-full items-center justify-center rounded-full border border-[#4B232D]/12 px-3 text-center text-[11px] font-bold leading-none text-[#4B232D] transition hover:-translate-y-0.5";
+
+const desktopButtonClass =
+  "rounded-full border border-[#4B232D]/12 px-4 py-2 text-[12px] font-bold text-[#4B232D] transition hover:-translate-y-0.5";
+
+function MobileCoverPanel({ cover }: { cover: (typeof covers)[number] }) {
   return (
-    <article className="overflow-hidden rounded-[34px] border border-white/35 bg-white/56 p-5 shadow-[0_18px_50px_rgba(75,35,45,0.08)] backdrop-blur-[14px] md:p-6">
+    <article className="grid gap-2.5 overflow-hidden rounded-[24px] border border-white/35 bg-white/60 p-3.5 shadow-[0_14px_38px_rgba(75,35,45,0.08)] backdrop-blur-[14px] md:hidden">
+      <div className="overflow-hidden rounded-[20px] border border-white/24 bg-[#4B232D]/88 shadow-[0_14px_38px_rgba(75,35,45,0.12)]">
+        <iframe
+          src={cover.youtubeEmbedUrl}
+          title={`${cover.title} YouTube cover videosu`}
+          className="block aspect-video w-full border-0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          loading="lazy"
+        />
+      </div>
+
+      <div className="rounded-[20px] border border-[#4B232D]/10 bg-white/54 p-4 shadow-[0_10px_28px_rgba(75,35,45,0.05)] backdrop-blur-[12px]">
+        <p className="section-eyebrow">Cover Notu</p>
+
+        <p className="mt-2 text-[12px] leading-6 text-[#4B232D]/72">
+          {cover.description}
+        </p>
+      </div>
+
+      <div className="rounded-[20px] border border-white/24 bg-white/52 p-3.5 shadow-[0_14px_38px_rgba(75,35,45,0.08)] backdrop-blur-[14px]">
+        <p className="text-center text-[8.5px] font-bold uppercase tracking-[0.18em] text-[#4B232D]/56">
+          İzleme Linkleri
+        </p>
+
+        <div className="mt-3 grid grid-cols-3 gap-2">
+          <a
+            href={cover.youtubeUrl}
+            target="_blank"
+            rel="noreferrer"
+            className={`${mobileButtonClass} bg-white/76 hover:bg-white/90`}
+          >
+            YouTube
+          </a>
+
+          <a
+            href={youtubeChannelUrl}
+            target="_blank"
+            rel="noreferrer"
+            className={`${mobileButtonClass} bg-white/76 hover:bg-white/90`}
+          >
+            Kanalım
+          </a>
+
+          <Link
+            href="/giris"
+            className={`${mobileButtonClass} bg-[#FFF4BC]/88`}
+          >
+            İndir
+          </Link>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function DesktopCoverPanel({ cover }: { cover: (typeof covers)[number] }) {
+  return (
+    <article className="hidden overflow-hidden rounded-[34px] border border-white/35 bg-white/56 p-6 shadow-[0_18px_50px_rgba(75,35,45,0.08)] backdrop-blur-[14px] md:block">
       <div className="grid gap-5 lg:grid-cols-[0.86fr_1.14fr] lg:items-stretch">
         <div className="flex min-h-[254px] flex-col justify-center rounded-[28px] border border-[#4B232D]/10 bg-white/48 p-6">
           <p className="section-eyebrow">Coverlarım</p>
@@ -64,7 +127,7 @@ function CoverPanel({ cover }: { cover: (typeof covers)[number] }) {
                 href={cover.youtubeUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full border border-[#4B232D]/12 bg-white/72 px-4 py-2 text-[12px] font-bold text-[#4B232D] transition hover:-translate-y-0.5 hover:bg-white/90"
+                className={`${desktopButtonClass} bg-white/72 hover:bg-white/90`}
               >
                 YouTube’da İzle
               </a>
@@ -73,14 +136,14 @@ function CoverPanel({ cover }: { cover: (typeof covers)[number] }) {
                 href={youtubeChannelUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full border border-[#4B232D]/12 bg-[#FFF4BC]/86 px-4 py-2 text-[12px] font-bold text-[#4B232D] transition hover:-translate-y-0.5"
+                className={`${desktopButtonClass} bg-[#FFF4BC]/86`}
               >
                 YouTube Kanalım
               </a>
 
               <Link
                 href="/giris"
-                className="rounded-full border border-[#4B232D]/12 bg-white/72 px-4 py-2 text-[12px] font-bold text-[#4B232D] transition hover:-translate-y-0.5 hover:bg-white/90"
+                className={`${desktopButtonClass} bg-white/72 hover:bg-white/90`}
               >
                 Siteden İndir
               </Link>
@@ -92,13 +155,22 @@ function CoverPanel({ cover }: { cover: (typeof covers)[number] }) {
   );
 }
 
+function CoverPanel({ cover }: { cover: (typeof covers)[number] }) {
+  return (
+    <>
+      <MobileCoverPanel cover={cover} />
+      <DesktopCoverPanel cover={cover} />
+    </>
+  );
+}
+
 export default function CoverlarimPage() {
   return (
     <main className="page-shell">
       <Navbar />
 
-      <section className="site-container pt-3 md:pt-4">
-        <div className="mb-5 flex items-end justify-between gap-4">
+      <section className="site-container pt-40 md:pt-4">
+        <div className="mb-3 hidden items-end justify-between gap-4 md:mb-5 md:flex">
           <div>
             <p className="section-eyebrow">Coverlarım</p>
             <h1 className="text-[clamp(34px,4.6vw,58px)] font-semibold leading-none tracking-[-0.075em] text-[#4B232D]">
@@ -111,7 +183,7 @@ export default function CoverlarimPage() {
           </Link>
         </div>
 
-        <div className="grid gap-5">
+        <div className="grid gap-4 md:gap-5">
           {covers.map((cover) => (
             <CoverPanel key={cover.slug} cover={cover} />
           ))}

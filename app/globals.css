@@ -940,41 +940,62 @@ b {
 
 @media (max-width: 640px) {
   :root {
-    --radius-main: 22px;
-    --radius-large: 28px;
+    --radius-main: 20px;
+    --radius-large: 24px;
+    --shadow-soft: 0 12px 34px rgba(75, 35, 45, 0.08);
+    --shadow-hover: 0 18px 54px rgba(75, 35, 45, 0.12);
+  }
+
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    background-image: url("/muhammed-hero3.jpg");
+    background-size: cover;
+    background-position: center top;
+    opacity: 1;
   }
 
   .site-container {
-    width: min(100% - 22px, var(--container));
+    width: min(100% - 28px, var(--container));
   }
 
-  .page-shell {
-    padding-top: 8px;
-    padding-bottom: 24px;
+    .page-shell {
+    padding-top: 108px;
+    padding-bottom: 20px;
   }
 
   .section-space {
-    padding: 24px 0;
+    padding: 16px 0;
   }
 
-  .navbar-wrap {
-    position: relative;
-    top: auto;
-    padding-bottom: 10px;
+    .navbar-wrap {
+    position: fixed;
+    top: calc(env(safe-area-inset-top) + 8px);
+    left: 0;
+    right: 0;
+    z-index: 120;
+    padding-bottom: 0;
   }
 
   .navbar-shell {
     min-height: auto;
-    gap: 6px;
-    padding: 7px 8px;
-    border-radius: 22px;
-    background: rgba(255, 255, 255, 0.88);
+    gap: 5px;
+    padding: 7px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 12px 34px rgba(75, 35, 45, 0.1);
     backdrop-filter: blur(16px);
   }
 
   .brand-link {
-    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     gap: 8px;
+    overflow: hidden;
   }
 
   .brand-mark {
@@ -984,14 +1005,26 @@ b {
     border-radius: 13px;
   }
 
+  .brand-copy {
+    min-width: 0;
+  }
+
   .brand-copy strong {
+    max-width: 100%;
+    overflow: hidden;
     font-size: 12px;
     letter-spacing: -0.035em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .brand-copy small {
+    max-width: 100%;
     margin-top: 2px;
+    overflow: hidden;
     font-size: 9px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .nav-side {
@@ -1001,102 +1034,200 @@ b {
   .nav-links {
     order: 3;
     width: 100%;
+    max-width: 100%;
     justify-content: flex-start;
-    gap: 2px;
+    gap: 3px;
     padding: 3px;
     overflow-x: auto;
-    background: rgba(255, 255, 255, 0.5);
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    background: rgba(255, 255, 255, 0.54);
+    -webkit-overflow-scrolling: touch;
   }
 
   .nav-link {
-    min-height: 28px;
-    padding: 0 9px;
-    font-size: 10px;
+    min-height: 27px;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    padding: 0 8px;
+    font-size: 9.5px;
+    letter-spacing: -0.015em;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    transform: none;
   }
 
   .section-header {
-    gap: 14px;
-    margin-bottom: 16px;
+    gap: 10px;
+    margin-bottom: 13px;
   }
 
   .section-eyebrow {
-    font-size: 9px;
-    letter-spacing: 0.18em;
+    margin-bottom: 6px;
+    font-size: 8px;
+    letter-spacing: 0.16em;
   }
 
   .section-title {
-    font-size: clamp(26px, 9vw, 36px);
-    line-height: 1;
+    font-size: clamp(22px, 7.2vw, 30px);
+    line-height: 1.04;
+    letter-spacing: -0.055em;
   }
 
   .section-description {
-    font-size: 13px;
-    line-height: 1.7;
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.58;
+  }
+
+  .soft-card,
+  .mint-card,
+  .cream-card,
+  .dark-card {
+    border-radius: var(--radius-main);
   }
 
   .pill-button {
-    min-height: 36px;
-    width: auto;
-    padding: 9px 15px;
-    font-size: 12px;
+    min-height: 34px;
+    padding: 8px 13px;
+    font-size: 11px;
   }
 
   .music-grid,
   .feature-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 12px;
   }
 
   .music-card {
-    border-radius: 24px;
+    border-radius: 20px;
+  }
+
+  .music-card:hover {
+    transform: none;
   }
 
   .music-cover {
-    aspect-ratio: 1 / 0.72;
-    border-radius: 24px 24px 0 0;
+    aspect-ratio: 1 / 0.62;
+    border-radius: 20px 20px 0 0;
   }
 
   .music-card-body {
-    padding: 16px;
+    padding: 13px;
+  }
+
+  .music-card-body span {
+    min-height: 22px;
+    padding: 0 8px;
+    font-size: 8.5px;
   }
 
   .music-card-body h3 {
-    font-size: 24px;
+    margin: 10px 0 6px;
+    font-size: 21px;
+    line-height: 1;
   }
 
   .music-card-body p {
     min-height: auto;
-    font-size: 13px;
-    line-height: 1.6;
+    font-size: 12px;
+    line-height: 1.5;
   }
 
   .card-actions {
-    margin-top: 16px;
+    gap: 12px;
+    margin-top: 13px;
+  }
+
+  .text-link {
+    font-size: 12px;
+  }
+
+  .feature-card {
+    min-height: auto;
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .feature-card:hover {
+    transform: none;
+  }
+
+  .feature-card span {
+    margin-bottom: 20px;
+    font-size: 8.5px;
+  }
+
+  .feature-card h3 {
+    font-size: 24px;
+  }
+
+  .feature-card p {
+    margin: 10px 0 16px;
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .story-card,
+  .contact-card {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .story-card p:not(.section-eyebrow),
+  .contact-card p {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .contact-card h2 {
+    font-size: 24px;
+    line-height: 1.06;
   }
 
   .hero-section {
-    padding-top: 16px;
+    padding-top: 12px;
   }
 
   .hero-copy {
-    padding: 23px;
+    gap: 24px;
+    padding: 20px;
   }
 
   .hero-title {
-    font-size: clamp(42px, 13vw, 58px);
+    font-size: clamp(34px, 10vw, 48px);
   }
 
   .hero-description {
-    font-size: 14px;
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 1.62;
   }
 
   .hero-meta {
     grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 22px;
+  }
+
+  .hero-meta div {
+    min-height: auto;
+    padding: 13px;
+    border-radius: 18px;
   }
 
   .hero-actions {
     align-items: flex-start;
     flex-direction: row;
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .hero-visual-wrap,
+  .hero-visual-card {
+    min-height: auto;
   }
 
   .floating-release-card {
@@ -1107,41 +1238,68 @@ b {
   }
 
   .release-card {
-    padding: 12px;
+    gap: 14px;
+    padding: 10px;
+    border-radius: 22px;
+  }
+
+  .release-cover {
+    min-height: min(72vw, 360px);
+    border-radius: 20px;
   }
 
   .release-content {
-    padding: 18px 10px 12px;
+    padding: 14px 8px 10px;
+  }
+
+  .release-content h2 {
+    font-size: clamp(30px, 10vw, 42px);
+  }
+
+  .release-content p {
+    font-size: 12px;
+    line-height: 1.6;
   }
 
   .release-actions {
     align-items: stretch;
     flex-direction: column;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .player-shell {
+    gap: 10px;
+    margin-top: 18px;
+    padding: 12px;
+    border-radius: 18px;
   }
 
   .site-footer {
     align-items: flex-start;
     flex-direction: column;
-    gap: 8px;
-    padding-top: 18px;
+    gap: 6px;
+    padding-top: 14px;
     padding-bottom: 6px;
-    font-size: 11px;
+    font-size: 10px;
+    line-height: 1.5;
   }
 
-  body::before {
-    opacity: 1;
-    background-size: cover;
-    background-position: center top;
+  iframe,
+  video,
+  img {
+    max-width: 100%;
   }
 
-  .page-shell > section:first-of-type > div:first-child {
-    min-height: calc(100svh - 104px) !important;
+  input,
+  textarea,
+  select,
+  button {
+    max-width: 100%;
   }
 
-  .page-shell > section:first-of-type > div:first-child > img {
-    object-fit: contain !important;
-    object-position: center top !important;
-    transform: translateY(42px) scale(0.80);
-    transform-origin: top center;
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
   }
 }

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import AuthButtons from "@/components/AuthButtons";
 
 const navItems = [
-  { label: "Ana Sayfa", href: "/" },
+  { label: "Menü", href: "/" },
   { label: "Şarkılarım", href: "/sarkilarim" },
   { label: "Coverlarım", href: "/coverlarim" },
   { label: "Fotoğraflarım", href: "/fotograflar" },
@@ -20,23 +20,57 @@ export default function Navbar() {
     <header className="navbar-wrap">
       <div className="site-container">
         <nav className="navbar-shell" aria-label="Ana menü">
-          <Link href="/" className="brand-link" aria-label="Ana sayfa">
-            <span className="brand-mark">
-              <Image
-                src="/icon-512.png"
-                alt="Muhammed Tankılıç"
-                fill
-                sizes="48px"
-                className="brand-mark-image"
-                priority
-              />
-            </span>
+          <div className="hidden w-full items-center justify-between gap-3 sm:flex sm:w-auto">
+            <Link href="/" className="brand-link" aria-label="Ana sayfa">
+              <span className="brand-mark">
+                <Image
+                  src="/icon-512.png"
+                  alt="Muhammed Tankılıç"
+                  fill
+                  sizes="48px"
+                  className="brand-mark-image"
+                  priority
+                />
+              </span>
 
-            <span className="brand-copy">
-              <strong>Muhammed Tankılıç</strong>
-              <small>Müzik · Sözler · Hikâyeler</small>
-            </span>
-          </Link>
+              <span className="brand-copy">
+                <strong>Muhammed Tankılıç</strong>
+                <small>Müzik · Sözler · Hikâyeler</small>
+              </span>
+            </Link>
+          </div>
+
+          <div className="flex w-full items-center justify-between gap-2 sm:hidden">
+            <Link
+              href="/"
+              className="flex min-w-0 flex-1 items-center gap-2 overflow-hidden"
+              aria-label="Ana sayfa"
+            >
+              <span className="relative h-9 w-9 flex-none overflow-hidden rounded-[13px] bg-[#BDEBE8]">
+                <Image
+                  src="/icon-512.png"
+                  alt="Muhammed Tankılıç"
+                  fill
+                  sizes="36px"
+                  className="object-cover"
+                  priority
+                />
+              </span>
+
+              <span className="flex min-w-0 flex-col leading-none">
+                <strong className="truncate text-[12px] font-bold tracking-[-0.035em] text-[#4B232D]">
+                  Muhammed Tankılıç
+                </strong>
+                <small className="mt-1 truncate text-[9px] font-normal text-[#4B232D]/58">
+                  Müzik · Sözler · Hikâyeler
+                </small>
+              </span>
+            </Link>
+
+            <div className="flex flex-none items-center gap-1.5">
+              <AuthButtons />
+            </div>
+          </div>
 
           <div className="nav-links">
             {navItems.map((item) => {

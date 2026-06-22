@@ -12,25 +12,25 @@ type Message = {
 };
 
 const inputClass =
-  "min-h-14 w-full rounded-[22px] border border-[#4B232D]/12 bg-white/82 px-5 text-base font-medium tracking-[-0.02em] text-[#4B232D] outline-none shadow-[0_12px_34px_rgba(75,35,45,0.06)] transition placeholder:text-[#4B232D]/34 focus:border-[#F5AE50]/70 focus:bg-white focus:shadow-[0_0_0_4px_rgba(245,174,80,0.18)]";
+  "min-h-11 w-full rounded-[18px] border border-[#4B232D]/12 bg-white/82 px-4 text-[13px] font-medium tracking-[-0.02em] text-[#4B232D] outline-none shadow-[0_8px_24px_rgba(75,35,45,0.05)] transition placeholder:text-[#4B232D]/34 focus:border-[#F5AE50]/70 focus:bg-white focus:shadow-[0_0_0_3px_rgba(245,174,80,0.16)] md:min-h-14 md:rounded-[22px] md:px-5 md:text-base";
 
-const passwordInputClass = `${inputClass} pr-14`;
+const passwordInputClass = `${inputClass} pr-11 md:pr-14`;
 
 const labelClass =
-  "text-[10px] font-bold uppercase tracking-[0.2em] text-[#4B232D]/64";
+  "text-[8.5px] font-bold uppercase tracking-[0.18em] text-[#4B232D]/64 md:text-[10px] md:tracking-[0.2em]";
 
 const actionButtonClass =
-  "inline-flex min-h-12 w-full items-center justify-center rounded-full px-5 text-sm font-bold shadow-[0_16px_36px_rgba(75,35,45,0.16)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0";
+  "inline-flex min-h-10 w-full items-center justify-center rounded-full px-2 text-center text-[10.5px] font-bold leading-none tracking-[-0.015em] shadow-[0_10px_24px_rgba(75,35,45,0.13)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 md:min-h-12 md:px-5 md:text-sm";
 
 const passwordToggleClass =
-  "absolute right-4 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-[#4B232D]/58 transition hover:bg-[#4B232D]/8 hover:text-[#4B232D] focus:outline-none focus:ring-2 focus:ring-[#F5AE50]/45";
+  "absolute right-2.5 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-[#4B232D]/58 transition hover:bg-[#4B232D]/8 hover:text-[#4B232D] focus:outline-none focus:ring-2 focus:ring-[#F5AE50]/45 md:right-4 md:h-9 md:w-9";
 
 function EyeIcon() {
   return (
     <svg
       aria-hidden="true"
       viewBox="0 0 24 24"
-      className="h-5 w-5"
+      className="h-4 w-4 md:h-5 md:w-5"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.9"
@@ -48,7 +48,7 @@ function EyeOffIcon() {
     <svg
       aria-hidden="true"
       viewBox="0 0 24 24"
-      className="h-5 w-5"
+      className="h-4 w-4 md:h-5 md:w-5"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.9"
@@ -162,14 +162,14 @@ export default function NewPasswordPage() {
     <main className="page-shell">
       <Navbar />
 
-      <section className="site-container relative pt-7 md:pt-9">
-        <div className="pointer-events-none absolute left-1/2 top-5 -z-0 -translate-x-1/2 select-none text-[clamp(78px,12vw,170px)] font-black leading-none tracking-[-0.12em] text-white/70">
+      <section className="site-container relative pt-50 md:pt-9">
+        <div className="pointer-events-none absolute left-1/2 top-8 -z-0 hidden -translate-x-1/2 select-none text-[clamp(78px,12vw,170px)] font-black leading-none tracking-[-0.12em] text-white/70 md:block">
           MUHAMMED
         </div>
 
-        <section className="relative z-10 mx-auto max-w-5xl rounded-[38px] border border-white/35 bg-white/62 p-7 shadow-[0_24px_70px_rgba(75,35,45,0.12)] backdrop-blur-[18px] md:p-8">
-          <div className="text-center">
-            <p className="section-eyebrow">Üyelik alanı</p>
+        <section className="relative z-10 mx-auto max-w-3xl rounded-[24px] border border-white/35 bg-white/66 p-4 shadow-[0_16px_44px_rgba(75,35,45,0.12)] backdrop-blur-[18px] md:max-w-5xl md:rounded-[38px] md:p-8">
+          <div className="hidden text-center md:block">
+            <p className="section-eyebrow">Üyelik Alanı</p>
 
             <h1 className="mx-auto mt-4 max-w-4xl text-[clamp(25px,3.1vw,42px)] font-semibold leading-[1.18] tracking-[-0.055em] text-[#4B232D]">
               <span className="block">Hesabına yeniden giriş yapmak için</span>
@@ -180,10 +180,10 @@ export default function NewPasswordPage() {
             </h1>
           </div>
 
-          <form onSubmit={handleSubmit} className="mt-7 grid gap-4">
-            <div className="rounded-[32px] border border-white/42 bg-white/58 p-5 shadow-[0_12px_34px_rgba(75,35,45,0.05)] backdrop-blur-[12px]">
-              <div className="grid gap-4 md:grid-cols-2">
-                <label className="grid gap-2">
+          <form onSubmit={handleSubmit} className="grid gap-3 md:mt-7 md:gap-4">
+            <div className="rounded-[22px] border border-white/42 bg-white/58 p-3.5 shadow-[0_10px_28px_rgba(75,35,45,0.05)] backdrop-blur-[12px] md:rounded-[32px] md:p-5">
+              <div className="grid gap-3 md:grid-cols-2 md:gap-4">
+                <label className="grid gap-1.5 md:gap-2">
                   <span className={labelClass}>Yeni şifren</span>
 
                   <div className="relative w-full">
@@ -210,7 +210,7 @@ export default function NewPasswordPage() {
                   </div>
                 </label>
 
-                <label className="grid gap-2">
+                <label className="grid gap-1.5 md:gap-2">
                   <span className={labelClass}>Yeni şifre tekrar</span>
 
                   <div className="relative w-full">
@@ -248,7 +248,7 @@ export default function NewPasswordPage() {
             {message ? (
               <div
                 className={[
-                  "rounded-[22px] border px-5 py-4 text-sm font-semibold leading-7 shadow-[0_10px_28px_rgba(75,35,45,0.05)]",
+                  "rounded-[18px] border px-4 py-3 text-[12px] font-semibold leading-6 shadow-[0_10px_28px_rgba(75,35,45,0.05)] md:rounded-[22px] md:px-5 md:py-4 md:text-sm md:leading-7",
                   message.type === "error"
                     ? "border-red-200 bg-red-50 text-red-700"
                     : "border-[#BDEBE8]/80 bg-[#BDEBE8]/45 text-[#4B232D]",
@@ -272,12 +272,12 @@ export default function NewPasswordPage() {
               </div>
             ) : null}
 
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid grid-cols-3 gap-2 md:gap-3">
               <Link
                 href="/giris"
                 className={`${actionButtonClass} bg-[#F5AE50] text-[#4B232D] hover:bg-[#f7bb67]`}
               >
-                ← Giriş Yap
+                ← Giriş
               </Link>
 
               <button
@@ -285,14 +285,14 @@ export default function NewPasswordPage() {
                 disabled={isSubmitting}
                 className={`${actionButtonClass} bg-[#4B232D] text-white hover:bg-[#5a2b36]`}
               >
-                {isSubmitting ? "Güncelleniyor..." : "Şifreyi Güncelle"}
+                {isSubmitting ? "..." : "Güncelle"}
               </button>
 
               <Link
                 href="/"
                 className={`${actionButtonClass} bg-[#F5AE50] text-[#4B232D] hover:bg-[#f7bb67]`}
               >
-                Ana Sayfa →
+                Menü →
               </Link>
             </div>
           </form>
