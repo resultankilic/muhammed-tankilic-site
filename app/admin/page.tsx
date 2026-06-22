@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import { checkIsAdmin } from "@/lib/admin/is-admin";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Admin Paneli | Muhammed Tankılıç",
@@ -10,36 +11,28 @@ export const metadata: Metadata = {
     "Muhammed Tankılıç web sitesi içerik, fotoğraf ve yayın yönetim paneli.",
 };
 
-const adminCards = [
-  {
-    title: "Şarkı Yönetimi",
-    description:
-      "Yeni şarkı ekle, mevcut şarkıları düzenle, Spotify ve Apple Music bağlantılarını yönet.",
-    href: "/admin/sarkilar",
-    label: "Yakında",
-  },
-  {
-    title: "Cover Yönetimi",
-    description:
-      "YouTube cover videolarını, açıklamaları ve bağlantıları panelden güncelle.",
-    href: "/admin/coverlar",
-    label: "Yakında",
-  },
-  {
-    title: "Fotoğraf Yönetimi",
-    description:
-      "Fotoğraf yükle, galeri görsellerini düzenle ve yayına al.",
-    href: "/admin/fotograflar",
-    label: "Yakında",
-  },
-  {
-    title: "Site Metinleri",
-    description:
-      "Ana sayfa, misyon yazısı ve iletişim metinlerini kod yazmadan düzenle.",
-    href: "/admin/metinler",
-    label: "Yakında",
-  },
-];
+type AdminTableName = "songs" | "covers" | "photos" | "site_texts";
+
+type TableCountResult = {
+  count: number;
+  error: string | null;
+};
+
+async function getTableCount(tableName: AdminTableName): Promise<TableCountResult> {
+  const supabase = await createClient();
+
+  const { count, error } = await supabase
+    .from(tableName)
+    .select("id", {
+      count: "exact",
+      head: true,
+    });
+
+  return {
+    count: count ?? 0,
+    error: error?.message ?? null,
+  };
+}
 
 export default async function AdminPage() {
   const admin = await checkIsAdmin();
@@ -51,6 +44,59 @@ export default async function AdminPage() {
   if (!admin.isAdmin) {
     redirect("/hesabim");
   }
+
+  const [songsCount, coversCount, photosCount, siteTextsCount] =
+    await Promise.all([
+      getTableCount("songs"),
+      getTableCount("covers"),
+      getTableCount("photos"),
+      getTableCount("site_texts"),
+    ]);
+
+  const adminCards = [
+    {
+      title: "Şarkı Yönetimi",
+      description:
+        "Yeni şarkı ekle, mevcut şarkıları düzenle, Spotify, Apple Music ve YouTube bağlantılarını yönet.",
+      href: "/admin/sarkilar",
+      label: "Yakında",
+      countLabel: "Kayıtlı şarkı",
+      count: songsCount.count,
+      error: songsCount.error,
+    },
+    {
+      title: "Cover Yönetimi",
+      description:
+        "YouTube cover videolarını, açıklamaları ve Instagram bağlantılarını panelden güncelle.",
+      href: "/admin/coverlar",
+      label: "Yakında",
+      countLabel: "Kayıtlı cover",
+      count: coversCount.count,
+      error: coversCount.error,
+    },
+    {
+      title: "Fotoğraf Yönetimi",
+      description:
+        "Fotoğraf yükle, galeri görsellerini düzenle, kategorilendir ve yayına al.",
+      href: "/admin/fotograflar",
+      label: "Yakında",
+      countLabel: "Kayıtlı fotoğraf",
+      count: photosCount.count,
+      error: photosCount.error,
+    },
+    {
+      title: "Site Metinleri",
+      description:
+        "Ana sayfa, misyon yazısı, iletişim metinleri ve sayfa açıklamalarını kod yazmadan düzenle.",
+      href: "/admin/metinler",
+      label: "Yakında",
+      countLabel: "Kayıtlı metin",
+      count: siteTextsCount.count,
+      error: siteTextsCount.error,
+    },
+  ];
+
+  const hasDatabaseError = adminCards.some((card) => card.error);
 
   return (
     <main className="page-shell">
@@ -76,6 +122,65 @@ export default async function AdminPage() {
             </div>
           </div>
 
+          <div className="mt-6 grid gap-3 md:mt-8 md:grid-cols-4">
+            <div className="rounded-[20px] border border-white/42 bg-white/62 p-4 text-center shadow-[0_10px_28px_rgba(75,35,45,0.06)] backdrop-blur-[12px] md:rounded-[26px]">
+              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#4B232D]/50">
+                Şarkılar
+              </p>
+              <p className="mt-2 text-3xl font-semibold tracking-[-0.06em] text-[#4B232D]">
+                {songsCount.count}
+              </p>
+            </div>
+
+            <div className="rounded-[20px] border border-white/42 bg-white/62 p-4 text-center shadow-[0_10px_28px_rgba(75,35,45,0.06)] backdrop-blur-[12px] md:rounded-[26px]">
+              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#4B232D]/50">
+                Coverlar
+              </p>
+              <p className="mt-2 text-3xl font-semibold tracking-[-0.06em] text-[#4B232D]">
+                {coversCount.count}
+              </p>
+            </div>
+
+            <div className="rounded-[20px] border border-white/42 bg-white/62 p-4 text-center shadow-[0_10px_28px_rgba(75,35,45,0.06)] backdrop-blur-[12px] md:rounded-[26px]">
+              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#4B232D]/50">
+                Fotoğraflar
+              </p>
+              <p className="mt-2 text-3xl font-semibold tracking-[-0.06em] text-[#4B232D]">
+                {photosCount.count}
+              </p>
+            </div>
+
+            <div className="rounded-[20px] border border-white/42 bg-white/62 p-4 text-center shadow-[0_10px_28px_rgba(75,35,45,0.06)] backdrop-blur-[12px] md:rounded-[26px]">
+              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#4B232D]/50">
+                Site Metinleri
+              </p>
+              <p className="mt-2 text-3xl font-semibold tracking-[-0.06em] text-[#4B232D]">
+                {siteTextsCount.count}
+              </p>
+            </div>
+          </div>
+
+          {hasDatabaseError ? (
+            <div className="mt-5 rounded-[22px] border border-red-200/70 bg-red-50/80 p-4 text-left text-[12px] leading-6 text-red-800">
+              <p className="font-bold">Veritabanı okuma uyarısı</p>
+
+              <ul className="mt-2 space-y-1">
+                {adminCards
+                  .filter((card) => card.error)
+                  .map((card) => (
+                    <li key={card.title}>
+                      {card.title}: {card.error}
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          ) : (
+            <div className="mt-5 rounded-[22px] border border-emerald-200/70 bg-emerald-50/70 p-4 text-center text-[12px] font-bold text-emerald-800">
+              Supabase bağlantısı başarılı. Admin panel veritabanı tablolarını
+              okuyabiliyor.
+            </div>
+          )}
+
           <div className="mt-6 grid gap-3 md:mt-8 md:grid-cols-2">
             {adminCards.map((card) => (
               <div
@@ -83,9 +188,15 @@ export default async function AdminPage() {
                 className="rounded-[20px] border border-white/42 bg-white/62 p-4 shadow-[0_10px_28px_rgba(75,35,45,0.06)] backdrop-blur-[12px] md:rounded-[28px] md:p-6"
               >
                 <div className="flex items-start justify-between gap-3">
-                  <h2 className="text-[24px] font-semibold leading-none tracking-[-0.065em] text-[#4B232D] md:text-[32px]">
-                    {card.title}
-                  </h2>
+                  <div>
+                    <h2 className="text-[24px] font-semibold leading-none tracking-[-0.065em] text-[#4B232D] md:text-[32px]">
+                      {card.title}
+                    </h2>
+
+                    <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#4B232D]/45">
+                      {card.count} {card.countLabel}
+                    </p>
+                  </div>
 
                   <span className="shrink-0 rounded-full bg-[#FFF4BC]/90 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.14em] text-[#4B232D]/70">
                     {card.label}
