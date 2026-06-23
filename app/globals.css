@@ -62,7 +62,7 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -3;
-  background-image: url("/muhammed-hero2-site.jpg");
+  background-image: url("/muhammed-hero.jpg");
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
@@ -70,7 +70,14 @@ body::before {
   filter: none;
   pointer-events: none;
 }
-
+@media (max-width: 640px) {
+  body::before {
+    background-image: url("/muhammed-hero3.jpg");
+    background-size: cover;
+    background-position: center top;
+    opacity: 1;
+  }
+}
 body::after {
   display: none;
 }
