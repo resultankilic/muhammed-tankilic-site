@@ -14,13 +14,13 @@ type ProfileForm = {
 };
 
 const inputClass =
-  "min-h-12 rounded-[20px] border border-[#4B232D]/12 bg-white/88 px-5 text-base font-medium tracking-[-0.02em] text-[#4B232D] outline-none shadow-[0_10px_28px_rgba(75,35,45,0.05)] transition placeholder:text-[#4B232D]/34 focus:border-[#F5AE50]/70 focus:bg-white focus:shadow-[0_0_0_4px_rgba(245,174,80,0.18)]";
+  "min-h-11 rounded-[18px] border border-[#4B232D]/12 bg-white/88 px-4 text-[14px] font-medium tracking-[-0.02em] text-[#4B232D] outline-none shadow-[0_10px_28px_rgba(75,35,45,0.05)] transition placeholder:text-[#4B232D]/34 focus:border-[#F5AE50]/70 focus:bg-white focus:shadow-[0_0_0_4px_rgba(245,174,80,0.18)] md:min-h-12 md:rounded-[20px] md:px-5 md:text-base";
 
 const labelClass =
-  "text-[10px] font-bold uppercase tracking-[0.18em] text-[#4B232D]/64";
+  "text-[8.5px] font-bold uppercase tracking-[0.16em] text-[#4B232D]/64 md:text-[10px] md:tracking-[0.18em]";
 
 const actionButtonClass =
-  "inline-flex min-h-12 w-full items-center justify-center rounded-full px-6 text-sm font-bold shadow-[0_16px_36px_rgba(75,35,45,0.16)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0";
+  "inline-flex min-h-10 w-full items-center justify-center rounded-full px-2 text-center text-[10.5px] font-bold leading-none shadow-[0_10px_24px_rgba(75,35,45,0.14)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 md:min-h-12 md:px-6 md:text-sm md:shadow-[0_16px_36px_rgba(75,35,45,0.16)]";
 
 export default function ProfilDuzenlePage() {
   const [supabase] = useState(() => createClient());
@@ -149,11 +149,11 @@ export default function ProfilDuzenlePage() {
       <main className="page-shell">
         <Navbar />
 
-        <section className="site-container relative pt-7 md:pt-9">
-          <div className="mx-auto max-w-4xl rounded-[34px] border border-white/35 bg-white/62 p-8 text-center shadow-[0_22px_64px_rgba(75,35,45,0.10)] backdrop-blur-[18px]">
+        <section className="site-container relative pt-6 md:pt-9">
+          <div className="mx-auto max-w-3xl rounded-[24px] border border-white/35 bg-white/66 p-4 text-center shadow-[0_16px_44px_rgba(75,35,45,0.12)] backdrop-blur-[18px] md:max-w-4xl md:rounded-[34px] md:p-8">
             <p className="section-eyebrow">Profil</p>
 
-            <h1 className="mt-3 text-[clamp(38px,4.6vw,62px)] font-semibold leading-none tracking-[-0.085em] text-[#4B232D]">
+            <h1 className="mt-2 text-[28px] font-semibold leading-none tracking-[-0.075em] text-[#4B232D] md:mt-3 md:text-[clamp(38px,4.6vw,62px)]">
               Profil yükleniyor...
             </h1>
           </div>
@@ -166,29 +166,29 @@ export default function ProfilDuzenlePage() {
     <main className="page-shell">
       <Navbar />
 
-      <section className="site-container relative pt-7 md:pt-9">
-        <div className="pointer-events-none absolute left-1/2 top-5 -z-0 -translate-x-1/2 select-none text-[clamp(78px,12vw,170px)] font-black leading-none tracking-[-0.12em] text-white/70">
+      <section className="site-container relative pt-6 md:pt-9">
+        <div className="pointer-events-none absolute left-1/2 top-5 -z-0 hidden -translate-x-1/2 select-none text-[clamp(78px,12vw,170px)] font-black leading-none tracking-[-0.12em] text-white/70 md:block">
           MUHAMMED
         </div>
 
-        <section className="relative z-10 mx-auto max-w-5xl rounded-[38px] border border-white/35 bg-white/62 p-7 shadow-[0_24px_70px_rgba(75,35,45,0.12)] backdrop-blur-[18px] md:p-8">
+        <section className="relative z-10 mx-auto max-w-3xl rounded-[24px] border border-white/35 bg-white/66 p-4 shadow-[0_16px_44px_rgba(75,35,45,0.12)] backdrop-blur-[18px] md:max-w-5xl md:rounded-[38px] md:p-8 md:shadow-[0_24px_70px_rgba(75,35,45,0.12)]">
           <div className="text-center">
             <p className="section-eyebrow">Profil ayarları</p>
 
-            <h1 className="mt-3 text-[clamp(48px,5.5vw,82px)] font-semibold leading-none tracking-[-0.095em] text-[#4B232D]">
+            <h1 className="mx-auto mt-2 max-w-[280px] text-[30px] font-semibold leading-[1.03] tracking-[-0.085em] text-[#4B232D] md:mt-3 md:max-w-4xl md:text-[clamp(48px,5.5vw,82px)] md:leading-none md:tracking-[-0.095em]">
               Bilgilerini Değiştir
             </h1>
 
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-8 text-[#4B232D]/68">
-              Ad, soyad, telefon, e-posta ve bildirim tercihini buradan
+            <p className="mx-auto mt-3 max-w-xl text-[12px] leading-6 text-[#4B232D]/68 md:mt-4 md:max-w-2xl md:text-sm md:leading-8">
+              Ad, soyad, telefon, e-posta ve bildirim tercihini
               güncelleyebilirsin.
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="mt-7 grid gap-4">
-            <div className="rounded-[32px] border border-white/42 bg-white/58 p-5 shadow-[0_12px_34px_rgba(75,35,45,0.05)] backdrop-blur-[12px]">
-              <div className="grid gap-4 md:grid-cols-2">
-                <label className="grid gap-2">
+          <form onSubmit={handleSubmit} className="mt-5 grid gap-3 md:mt-7 md:gap-4">
+            <div className="rounded-[24px] border border-white/42 bg-white/58 p-3.5 shadow-[0_12px_34px_rgba(75,35,45,0.05)] backdrop-blur-[12px] md:rounded-[32px] md:p-5">
+              <div className="grid gap-3 md:grid-cols-2 md:gap-4">
+                <label className="grid gap-1.5 md:gap-2">
                   <span className={labelClass}>Adın</span>
 
                   <input
@@ -202,7 +202,7 @@ export default function ProfilDuzenlePage() {
                   />
                 </label>
 
-                <label className="grid gap-2">
+                <label className="grid gap-1.5 md:gap-2">
                   <span className={labelClass}>Soyadın</span>
 
                   <input
@@ -216,7 +216,7 @@ export default function ProfilDuzenlePage() {
                   />
                 </label>
 
-                <label className="grid gap-2">
+                <label className="grid gap-1.5 md:gap-2">
                   <span className={labelClass}>Telefonun</span>
 
                   <input
@@ -231,7 +231,7 @@ export default function ProfilDuzenlePage() {
                   />
                 </label>
 
-                <label className="grid gap-2">
+                <label className="grid gap-1.5 md:gap-2">
                   <span className={labelClass}>E-postan</span>
 
                   <input
@@ -248,8 +248,8 @@ export default function ProfilDuzenlePage() {
               </div>
             </div>
 
-            <div className="rounded-[26px] border border-white/42 bg-white/72 px-5 py-4 shadow-[0_10px_28px_rgba(75,35,45,0.05)] backdrop-blur-[12px]">
-              <label className="flex gap-3 text-sm leading-7 text-[#4B232D]/72">
+            <div className="rounded-[20px] border border-white/42 bg-white/72 px-4 py-3 shadow-[0_10px_28px_rgba(75,35,45,0.05)] backdrop-blur-[12px] md:rounded-[26px] md:px-5 md:py-4">
+              <label className="flex gap-3 text-[12px] leading-6 text-[#4B232D]/72 md:text-sm md:leading-7">
                 <input
                   type="checkbox"
                   checked={form.bildirimIzni}
@@ -259,7 +259,7 @@ export default function ProfilDuzenlePage() {
                       bildirimIzni: event.target.checked,
                     })
                   }
-                  className="mt-1 h-4 w-4 rounded border-[#4B232D]/30 accent-[#4B232D]"
+                  className="mt-1 h-4 w-4 shrink-0 rounded border-[#4B232D]/30 accent-[#4B232D]"
                 />
 
                 <span>
@@ -270,12 +270,12 @@ export default function ProfilDuzenlePage() {
             </div>
 
             {message ? (
-              <p className="rounded-[22px] border border-[#BDEBE8]/80 bg-[#BDEBE8]/45 px-5 py-4 text-sm font-semibold leading-7 text-[#4B232D] shadow-[0_10px_28px_rgba(75,35,45,0.05)]">
+              <p className="rounded-[18px] border border-[#BDEBE8]/80 bg-[#BDEBE8]/45 px-4 py-3 text-[12px] font-semibold leading-6 text-[#4B232D] shadow-[0_10px_28px_rgba(75,35,45,0.05)] md:rounded-[22px] md:px-5 md:py-4 md:text-sm md:leading-7">
                 {message}
               </p>
             ) : null}
 
-            <div className="grid gap-3 sm:grid-cols-2">
+           <div className="grid grid-cols-2 gap-2 md:gap-3">
               <Link
                 href="/hesabim"
                 className={`${actionButtonClass} bg-[#F5AE50] text-[#4B232D] hover:bg-[#f7bb67]`}
@@ -288,7 +288,7 @@ export default function ProfilDuzenlePage() {
                 disabled={saving}
                 className={`${actionButtonClass} bg-[#4B232D] text-white hover:bg-[#5a2b36]`}
               >
-                {saving ? "Kaydediliyor..." : "Değişiklikleri Kaydet"}
+                {saving ? "Kaydediliyor..." : "Kaydet"}
               </button>
             </div>
           </form>
